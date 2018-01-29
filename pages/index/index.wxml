@@ -29,7 +29,7 @@
 <view class='reverse'>
   <navigator url='../dateSelect/dateSelect'>
     <view class='method' style='text-align:center;'>入住</view>
-    <view class='date'>{{checkInData}}</view>
+     <view class='date'>{{checkInDate}} {{day}}</view> 
   </navigator>
-  <view class='advance'>预定</view>
+  <view class='advance' bindtap='checkInDetail'>预定</view>
 </view>

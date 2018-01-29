@@ -36,13 +36,13 @@ Moment.prototype.format = function(format){
         "S": date.getMilliseconds() //毫秒 
     };
     var week = {           
-        "0" : "/u65e5",           
-        "1" : "/u4e00",           
-        "2" : "/u4e8c",           
-        "3" : "/u4e09",           
-        "4" : "/u56db",           
-        "5" : "/u4e94",           
-        "6" : "/u516d"          
+        "0" : "周日",           
+        "1" : "周一",           
+        "2" : "周二",           
+        "3" : "周三",           
+        "4" : "周四",           
+        "5" : "周五",           
+        "6" : "周六"          
     };       
     if (/(y+|Y+)/.test(format))
         format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));

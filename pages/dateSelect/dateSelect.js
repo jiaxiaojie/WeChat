@@ -24,7 +24,7 @@ Page({
     this.createDateListData();
     var _this = this;
     // 页面初始化 options为页面跳转所带来的参数
-
+    console.log(options)
     var checkInDate = options.checkInDate?options.checkInDate:Moment(new Date()).format('YYYY-MM-DD');
     var checkOutDate = options.checkOutDate?options.checkOutDate:Moment(new Date()).add(1,'day').format('YYYY-MM-DD');
 

@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx707851aa79b08612",
-	"projectname": "Hotel",
+	"projectname": "wxhotel",
 	"condition": {
 		"search": {
 			"current": -1,

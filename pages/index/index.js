@@ -1,16 +1,28 @@
+var Moment = require("../../utils/Moment.js");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+      //默认日期&时间
+    checkInDate: Moment(new Date()).format('yyyy-MM-dd'),
+    day: Moment(new Date()).format('E')
   },
+
   checkInTime: function () {
     wx.navigateTo({
-      url: '../stayleng/stayleng',
+      url:'../stayleng/stayleng',
     });
   },
+
+  checkInDetail:function(){
+    wx.navigateTo({
+      url: '../detail/detail?date=' + this.data.checkInDate,
+    });
+  },
+
   couponInformation: function () {    
   },
   /**
@@ -35,9 +47,9 @@ Page({
     wx.getStorage({
       key: 'ROOM_SOURCE_DATE',
       success: function(res) {
-        console.log(res.data.checkInDate);
         self.setData({
-          checkInData: res.data.checkInDate
+          checkInDate: res.data.checkInDate,
+          day: Moment(new Date(res.data.checkInDate)).format('E')
         })
       },
     })
