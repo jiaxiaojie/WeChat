@@ -18,8 +18,14 @@ Page({
   },
 
   checkInDetail:function(){
+  
+    var dateInfo = JSON.stringify({
+      inDate: this.data.checkInDate,
+      outDate: this.data.checkOutDate
+    })
+    console.info(dateInfo)
     wx.navigateTo({
-      url: '../detail/detail?date=' + this.data.checkInDate,
+      url: "../detail/detail?dateInfo=" + dateInfo,
     });
   },
 
@@ -49,6 +55,7 @@ Page({
       success: function(res) {
         self.setData({
           checkInDate: res.data.checkInDate,
+          checkOutDate: res.data.checkOutDate,
           day: Moment(new Date(res.data.checkInDate)).format('E')
         })
       },

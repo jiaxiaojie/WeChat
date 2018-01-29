@@ -28,9 +28,9 @@
 </view>
 
 <view class='item' style='margin-top:20rpx;'>
-  <view style='color:#666; font-size:28rpx;'>入住时间 <text style='color:#BA8E52;margin-left:20rpx;'>12月7日</text></view>
+  <view style='color:#666; font-size:28rpx;'>入住时间 <text style='color:#BA8E52;margin-left:20rpx;'>{{checkInDate}}</text></view>
   <view class='right'>
-  <view style='font-size:24rpx;color:#999; margin-right:20rpx; float:left;'>共1晚</view>
+  <view style='font-size:24rpx;color:#999; margin-right:20rpx; float:left;'>共{{checkInDays}}晚</view>
   <image class='arrow' src='../../image/arrow.png'></image>
   </view>
 </view>
@@ -39,12 +39,14 @@
   <view class='home active'>分时房</view>
   <view class='home'>天时房</view>
 </view>
-<view class='items'>
+<!-- list start-->
+<view wx:for="{{roomList}}" wx:key="id">
+    <view class='items'>
   <view>
-    <text style='font-size:28rpx;color:#333;'>标准单人间</text>
+    <text style='font-size:28rpx;color:#333;'>{{item.name}}</text>
     <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
   </view>
-  <view style='font-size:24rpx;color:#666;'>¥ 13元/小时起 <text style='font-size:22rpx; color:#999;margin-right:20rpx;'>（门市价）</text>
+  <view style='font-size:24rpx;color:#666;'>¥ {{item.price}}元/小时起 <text style='font-size:22rpx; color:#999;margin-right:20rpx;'>（门市价）</text>
   <image style='width: 22rpx;height: 12rpx;'src='../../image/upangel.png'></image>     
   </view>
 </view>
@@ -52,14 +54,15 @@
 <view class='items' style='background:#F8F8F8;'>
   <view class='member'>
     会员价  <text class="iconfont icon-wenhao" style='margin-left:10rpx;'></text>
-    <view style='font-size:22rpx; color:#999;'>仅剩2间</view>
+    <view style='font-size:22rpx; color:#999;'>仅剩{{item.num}}间</view>
   </view>
-  <view class='intro'>单人床／无窗／无早</view>
-  <view class='time'>¥12元/小时</view>
+  <view class='intro'>{{item.info}}</view>
+  <view class='time'>¥{{item.vipprice}}元/小时</view>
   <view class='order'>预定</view>
 </view>
-
-<view class='items'>
+</view> 
+<!-- list end -->
+<!-- <view class='items'>
   <view>
     <text style='font-size:28rpx;color:#333;'>大床双人间</text>
     <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
@@ -68,15 +71,5 @@
     <text style='margin-right:20rpx;'>¥12元/小时起 </text>  
     <image style='width: 22rpx;height: 12rpx;transform:rotate(180deg);'src='../../image/upangel.png'></image>     
   </view>
-</view>
+</view> -->
 
-<view class='items'>
-  <view>
-    <text style='font-size:28rpx;color:#333;'>大床双人间</text>
-    <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
-  </view>
-  <view style='font-size:26rpx;color:#E2231A;'>
-    <text style='margin-right:20rpx;'>¥12元/小时起 </text>  
-    <image style='width: 22rpx;height: 12rpx;transform:rotate(180deg);'src='../../image/upangel.png'></image>     
-  </view>
-</view>
