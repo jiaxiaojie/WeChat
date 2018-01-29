@@ -1,0 +1,60 @@
+<view class='header'>
+  <view class='title'>苏州缀美主题酒店</view>
+  <view class='info'>
+    <view>入住:
+      <text style="color:#000;">12月7日</text>
+    </view>
+    <view style='margin-left:170rpx;margin-right:130rpx;'>离店:
+      <text style="color:#000;">12月8日</text>
+    </view>
+    <view>共
+      <text>1</text>晚</view>
+  </view>
+  <view class='footer'>苏州管前街1100号</view>
+</view>
+
+<view class='content'>
+  <view class='item items'>
+    <text>双床房</text>
+    <view class="btn-numbox">
+      <view class="count">
+        <text id="num-jian" class="num-jian" bindtap="bindMinus">-</text>
+        <input type="number" class="input-num" bindchange="bindManual" id="input-num" value="{{num}}" />
+        <text id="num-jia" class="num-jia" bindtap="bindPlus">+</text>
+      </view>
+      </view>
+  </view>
+  <view class='item'>
+    <text>入住房</text>
+    <input class='cnt' type='text' placeholder='请输入您的真实姓名'></input>
+  </view>
+  <view class='item'>
+    <text>手机号</text>
+    <input class='cnt' type='text' placeholder='请输入您的手机号'></input>
+  </view>
+  <view class='item'>
+    <text>优惠券</text>
+    <view>
+      <text style='margin-left:60rpx;'>选择抵用券</text>
+      <image class="arrow" src='../../image/arrow.png'></image>
+    </view>
+  </view>
+</view>
+
+
+<view class='note'>
+  <text class="iconfont icon-gantanhao" style='margin-top:-5rpx;'></text>
+  <view class='info'>分时住宿客户需额外支付30元宝洁费用请于入住日下午14:00后办理入住，如提前到店，视酒店空房情况安排。</view>
+</view> 
+
+
+<!--提交订单  -->
+<view class='suborder'>
+  <view class='left'>
+    <text class='price'>¥ 330</text>
+    <text class='intro'>剩余金额将返还至个人账号</text>
+    <text class='detail'>明细</text>
+    <image class='imgs' src='../../image/upangel.png'></image>
+  </view>
+  <view class='right'>提交订单</view>
+</view>

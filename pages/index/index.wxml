@@ -1,0 +1,35 @@
+<view style='display: flex;justify-content: center;'>
+  <view class='header'>
+    <image class='img'
+      src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image>
+    <view class='info'>
+      <view style='font-size:32rpx;'>打造温馨舒适的住房体验</view>
+      <view style='font-size:26rpx; color:#666; margin-top:22rpx;'><text class="iconfont icon-wxbdingwei">{{begindate}}</text>苏州观前街885号某某某巷子右转</view>
+    </view>
+  </view>
+</view>
+
+<!--列表  -->
+<view class='tab'>
+  <view class='item' bindtap="checkInTime" >
+    <image src='../../image/time.png'></image>
+    <view>分时信息</view>
+  </view>
+   <view class='item'>
+    <image src='../../image/card.png'></image>
+    <view>卡券</view>
+  </view>
+   <view class='item'>
+    <image src='../../image/member.png'></image>
+    <view>会员</view>
+  </view>
+</view>
+
+<!--入住预定  -->
+<view class='reverse'>
+  <navigator url='../dateSelect/dateSelect'>
+    <view class='method' style='text-align:center;'>入住</view>
+    <view class='date'>{{checkInData}}</view>
+  </navigator>
+  <view class='advance'>预定</view>
+</view>

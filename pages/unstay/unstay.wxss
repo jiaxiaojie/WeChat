@@ -1,0 +1,29 @@
+page{
+  background-color: #fff;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  padding-top:220rpx;
+}
+.content image{
+  width: 200rpx;
+  height: 200rpx;
+}
+.content .info{
+  font-size: 32rpx;
+  color:#666;
+  margin-top:38rpx;
+}
+.content .goorder{
+  color:#fff;
+  font-size: 32rpx;
+  width:552rpx;
+  height: 80rpx; 
+  background: #BA8E52;
+  border-radius: 3px;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top:240rpx;
+}

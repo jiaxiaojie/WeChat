@@ -1,0 +1,73 @@
+.swiper-tab{  
+    width: 100%;  
+    background-color: #fff;
+    border-top: 1rpx solid #f5f5f5 ; 
+    border-bottom: 1rpx solid #f5f5f5 ; 
+    line-height: 90rpx;
+    height: 90rpx;
+    }  
+.swiper-tab-list{  
+    font-size: 30rpx;  
+    display: inline-block;  
+    width: 50%;  
+    color: #666;  
+    text-align: center;
+}  
+page{
+  background-color: #f0f0f0;
+}
+.on{
+  background: #BA8E52;
+  color:#fff;
+}
+.img{
+  width:690rpx;
+  height: 166rpx;
+  margin:30rpx auto;
+  display: flex;
+}
+.item{
+  position: relative;
+}
+.item text{
+  position:absolute;
+}
+.item .title{
+  top:48rpx;
+  left:150rpx;
+  font-size: 30rpx;
+  color:#333;
+}
+.item .info{
+  top:100rpx;
+  left:145rpx;
+  font-size: 24rpx;
+  color:#666;
+}
+.item .single{
+  color:#fff;
+  top:45rpx;
+  right:160rpx;
+  font-size:32rpx;
+
+}
+.item .quan{
+  color:#fff;
+  top:95rpx;
+  right:145rpx;
+  font-size:32rpx;
+}
+.item .num{
+  font-size: 48rpx;
+  color:#fff;
+  top:48rpx;
+  right:50rpx;
+}
+.item .use{
+  position:absolute;
+  width:130rpx ;
+  height:130rpx;
+  z-index: 99;
+  top:0;
+  right: 30rpx;
+}

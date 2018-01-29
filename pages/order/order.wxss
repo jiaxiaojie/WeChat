@@ -1,0 +1,133 @@
+.header{
+  width: 100%;
+  height: 200rpx;
+  box-sizing: border-box;
+  padding:34rpx 30rpx 44rpx 34rpx;
+  font-size: 24rpx;
+  color:#999;
+}
+.header .title{
+  font-size: 28rpx;
+  color: #333;
+}
+.header .info{
+  display: flex;
+  justify-content:space-between;
+  margin-top:20rpx;
+  margin-bottom:10rpx;
+}
+.content{
+  background-color: #fff;
+  font-size: 26rpx;
+  color:#666;
+}
+.content .item{
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx solid #D9D9D9;
+  padding:0 30rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+.content .items{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-numbox,.count{
+  height: 90rpx;
+}
+.count .num-jian,.count .num-jia,.count .input-num{
+  display: inline-block;
+  height: 56rpx;
+  width:48rpx;
+  border:1rpx solid #f0f0f0;
+  line-height: 56rpx;
+  text-align: center;
+  float: left;
+  margin-top: 14rpx;
+  font-size: 30rpx;
+  cursor: pointer;
+}
+.count .input-num{
+  width:80rpx;
+}
+.item .cnt{
+  margin-left:60rpx;
+  margin-top:22rpx;
+  color:#000;
+}
+.item .arrow{
+  width: 12rpx;
+  height: 22rpx;
+  margin-left: 410rpx;
+  
+}
+@font-face {
+  font-family: 'iconfont';  
+  src: url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.eot');
+  src: url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.svg#iconfont') format('svg');
+}
+
+.note{
+  display: flex;
+  padding:28rpx 26rpx 0 22rpx;
+  box-sizing: border-box;
+}
+.note .info{
+  font-size: 22rpx;
+  color: #999;
+  margin-left:5rpx;
+}
+
+.suborder{
+  width:100%;
+  height: 90rpx;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+}
+.suborder .left{
+  font-size: 22rpx;
+}
+.suborder .price{
+  color: #E2231A;
+  font-size: 32rpx;
+  position:absolute;
+  left:40rpx;
+  top:14rpx;
+}
+.suborder .intro{
+  color:#B6B6B6;
+  left:40rpx;
+  top:52rpx;
+  position: absolute;
+}
+.suborder .detail{
+  color:#666;
+  left:376rpx;
+  top:34rpx;
+  position: absolute;
+}
+.suborder .left .imgs{
+  height: 12rpx;
+  width:22rpx;
+  position: absolute;
+  left:436rpx;
+  top:42rpx;
+}
+.suborder .right{
+  color:#fff;
+  font-size: 32rpx;
+  width: 270rpx;
+  background-color: #BA8E52;
+  line-height: 90rpx;
+  text-align: center;
+  height: 90rpx;
+  position:absolute;
+  right:0;
+  top:0;
+}

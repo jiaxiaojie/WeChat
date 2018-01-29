@@ -1,0 +1,103 @@
+<view class='content'>
+  <view>
+    入住时长
+  </view>
+  <view class='time'>
+    <text class='item'>{{h1}}</text>
+    <text class='item'>{{h2}}</text>
+    <text class='items'>:</text>
+    <text class='item'>{{m1}}</text>
+    <text class='item'>{{m2}}</text>
+    <text class='items'>:</text>
+    <text class='item'>{{s1}}</text>
+    <text class='item'>{{s2}}</text>
+  </view>
+  <view class='last'>
+    <text>预估剩余时长:</text><text>10</text>小时
+  </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>

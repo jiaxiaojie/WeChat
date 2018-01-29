@@ -1,0 +1,82 @@
+.header {
+  margin-top: 60rpx;
+  width: 670rpx;
+  height: 216rpx;
+  background: #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.20);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 28rpx;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.header .img {
+  height: 160rpx;
+  width: 160rpx;
+  border-radius: 5rpx;
+}
+
+
+
+.tab{
+  width: 100%;
+  height:216rpx;
+  background-color: #fff;
+  margin-top:-15rpx;
+  padding:0 80rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tab .item image{
+  height: 100rpx;
+  width: 100rpx;
+}
+.tab .item view{
+  color:#666;
+  font-size: 26rpx;
+  text-align: center;
+}
+.reverse{
+  width: 100%;
+  height:384rpx;
+  background-color: #fff;
+  margin-top:22rpx;
+  display: flex;
+  flex-direction: column;
+  padding:56rpx 0 60rpx;
+  box-sizing: border-box;
+  align-items: center;
+}
+.method{
+  font-size: 32rpx;
+  color:#333;
+}
+.date{
+  color:#BA8E52;
+  font-size: 36rpx;
+  margin-top:36rpx;
+}
+.advance{
+  color:#fff;
+  font-size:32rpx;
+  width:552rpx;
+  height: 80rpx;
+  background-color: #BA8E52;
+  border-radius: 3px;
+  font-family: PingFangSC-Regular; 
+  text-align: center;
+  line-height: 80rpx;
+  margin-top:70rpx;
+}
+@font-face {
+  font-family: 'iconfont'; /* project id 551179 */
+  src: url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.eot');
+  src: url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.eot?#iefix') format('embedded-opentype'),
+         url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.woff') format('woff'),
+         url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.ttf') format('truetype'),
+         url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.svg#iconfont') format('svg');
+}

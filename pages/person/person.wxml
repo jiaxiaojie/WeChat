@@ -1,0 +1,31 @@
+<view style='display: flex;justify-content: center;'>
+  <view class='header'>
+    <image class='img'
+      src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image>
+    <text style='margin-top:28rpx;'>jin</text>
+    <text class='pay'>充值</text>
+    <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>7:20-9:50</text></view>
+  </view>
+</view>
+
+<!--列表  -->
+<view class='tab'>
+  <view class='item'>
+    <image src='../../image/order.png'></image>
+    <view>全部订单</view>
+  </view>
+   <view class='item'>
+    <image src='../../image/breakfast.png'></image>
+    <view>早餐券</view>
+  </view>
+   <view class='item'>
+    <image src='../../image/home.png'></image>
+    <view>待入住</view>
+  </view>
+</view>
+
+<!--优惠券  -->
+<view class='coupon'>
+  <text>我的优惠券</text>
+  <image src='../../image/arrow.png'></image>
+</view>

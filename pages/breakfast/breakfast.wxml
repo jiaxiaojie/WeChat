@@ -1,0 +1,64 @@
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">未使用</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已使用</view>  
+</view>
+<!--未使用  -->
+<view style="display:{{currentTab==0 ? '' : 'none'}}">
+  <view class='item'>
+    <image class='img' src='../../image/gold.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+  </view>
+  <view class='item'>
+    <image class='img' src='../../image/gold.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+  </view>
+  <view class='item'>
+    <image class='img' src='../../image/gold.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+  </view>
+</view>
+<!--已使用  -->
+<view style="display:{{currentTab==1 ? '' : 'none'}}">
+  <view class='item'>
+    <image class='img' src='../../image/gray.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+    <image class='use' src='../../image/use.png'></image>
+  </view>
+  <view class='item'>
+    <image class='img' src='../../image/gray.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+    <image class='use' src='../../image/use.png'></image>
+  </view>
+  <view class='item'>
+    <image class='img' src='../../image/gray.png'></image>
+    <text class='title'>缀美主题酒店</text>
+    <text class='info'>请至前台领取使用</text>
+    <text class='single'>单人</text>
+    <text class='quan'>早餐券</text>
+    <text class='num'>x1</text>
+    <image class='use' src='../../image/use.png'></image>
+  </view>
+</view>
+
+
+

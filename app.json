@@ -1,0 +1,21 @@
+{
+  "pages": [     
+    "pages/stayleng/stayleng",
+    "pages/allorders/allorders",
+    "pages/breakfast/breakfast",
+    "pages/person/person",
+    "pages/recharge/recharge",
+    "pages/unstay/unstay",
+    "pages/order/order",
+    "pages/detail/detail",    
+    "pages/dateSelect/dateSelect",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "缀美酒店",
+    "navigationBarTextStyle": "black"
+  },
+  "debug":true
+}
