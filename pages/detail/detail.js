@@ -21,26 +21,49 @@ Page({
     checkInDays:0,
     roomList:[
       {id:1,name:"标准单人间",price:13,vipprice:12,info:"单人床/无窗/无早",num:2},
-      {id:2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 }
-    ]
+      {id:2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
+      { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
+      { id: 2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
+      { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
+      { id: 2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
+      { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
+      { id: 2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
+      { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
+      { id: 2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
+    ],
+    tabArr: {
+      curHdIndex: 0,
+      curBdIndex: 0
+    },
+  },
+// tab 选项卡
+  tabFun: function (e) {
+    //获取触发事件组件的dataset属性  
+    var _datasetId = e.target.dataset.id;
+    console.log("----" + _datasetId + "----");
+    var _obj = {};
+    _obj.curHdIndex = _datasetId;
+    _obj.curBdIndex = _datasetId;
+    this.setData({
+      tabArr: _obj
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;  
 
     var dateInfo = JSON.parse(options.dateInfo);
     console.log(dateInfo)
     var differ = daysDiffer(dateInfo.inDate, dateInfo.outDate);
-    this.setData({
+    that.setData({
       checkInDate: Moment(new Date(dateInfo.inDate)).format('MM-dd'),
       checkInDays: differ
     }) ;
 
-
-
+  
   },
 
   /**

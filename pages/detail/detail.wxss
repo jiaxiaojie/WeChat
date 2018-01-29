@@ -58,6 +58,7 @@
   color:#666;
 }
 .items .active{
+   display: block;
   color:#fff;
   background: #BA8E52;
   border-radius: 20px;
@@ -90,3 +91,28 @@
   url('//at.alicdn.com/t/font_551568_byt6deo6j9aa714i.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_551568_byt6deo6j9aa714i.svg#iconfont') format('svg');
 }
+/* .tab{  
+    display: flex;  
+    flex-direction: row;  
+}  
+.tab-left{  
+    width: 200rpx;  
+    line-height: 160%;  
+    border-right: solid 1px gray;  
+}  
+.tab-left view{  
+    border-bottom: solid 1px red;  
+}  
+.tab-left .active{  
+    color: #f00;  
+}  
+.tab-right{  
+    line-height: 160%;  
+}  
+.tab-right .right-item{  
+    padding-left: 15rpx;  
+    display: none;  
+}  
+.tab-right .right-item.active{  
+    display: block;  
+}  */
