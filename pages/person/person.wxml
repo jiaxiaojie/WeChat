@@ -4,7 +4,7 @@
       src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image>
     <text style='margin-top:28rpx;'>jin</text>
     <text class='pay'>充值</text>
-    <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>7:20-9:50</text></view>
+    <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>{{remainder}}</text></view>
   </view>
 </view>
 

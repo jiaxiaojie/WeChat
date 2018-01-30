@@ -15,11 +15,11 @@
     <image src='../../image/time.png'></image>
     <view>分时信息</view>
   </view>
-   <view class='item'>
+   <view class='item' bindtap='viewCoupons'>
     <image src='../../image/card.png'></image>
     <view>卡券</view>
   </view>
-   <view class='item'>
+   <view class='item' bindtap='viewMember'>
     <image src='../../image/member.png'></image>
     <view>会员</view>
   </view>

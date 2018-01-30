@@ -6,6 +6,16 @@ Page({
    */
   data: {
     currentTab: 0,
+    couponsList:[
+      {id:1, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1},
+      { id:2,name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
+      { id: 3, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 }
+      ],
+    unUseCouponsList:[
+      { id: 1, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
+      { id: 2, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
+      { id: 3, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 }
+    ]
   },
 
   /**
@@ -15,13 +25,13 @@ Page({
   
   },
   swichNav:function(e){
-    var that = this;
-    var current = e.target.dataset.current;
-    if (this.data.currentTab === e.target.dataset.current) {
+    var that = this
+    var current = e.target.dataset.current
+    if (this.data.currentTab === current) {
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current
+        currentTab: current
       })
     }
   },

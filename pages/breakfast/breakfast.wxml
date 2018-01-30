@@ -4,58 +4,24 @@
 </view>
 <!--未使用  -->
 <view style="display:{{currentTab==0 ? '' : 'none'}}">
-  <view class='item'>
+  <view class='item' wx:for="{{couponsList}}" wx:key="id">
     <image class='img' src='../../image/gold.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
-  </view>
-  <view class='item'>
-    <image class='img' src='../../image/gold.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
-  </view>
-  <view class='item'>
-    <image class='img' src='../../image/gold.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
+    <text class='title'>{{item.name}}</text>
+    <text class='info'>{{item.tip}}</text>
+    <text class='single'>{{item.people}}</text>
+    <text class='quan'>{{item.type}}</text>
+    <text class='num'>x{{item.num}}</text>
   </view>
 </view>
 <!--已使用  -->
 <view style="display:{{currentTab==1 ? '' : 'none'}}">
-  <view class='item'>
+  <view class='item' wx:for="{{unUseCouponsList}}" wx:key="id">
     <image class='img' src='../../image/gray.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
-    <image class='use' src='../../image/use.png'></image>
-  </view>
-  <view class='item'>
-    <image class='img' src='../../image/gray.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
-    <image class='use' src='../../image/use.png'></image>
-  </view>
-  <view class='item'>
-    <image class='img' src='../../image/gray.png'></image>
-    <text class='title'>缀美主题酒店</text>
-    <text class='info'>请至前台领取使用</text>
-    <text class='single'>单人</text>
-    <text class='quan'>早餐券</text>
-    <text class='num'>x1</text>
+    <text class='title'>{{item.name}}</text>
+    <text class='info'>{{item.tip}}</text>
+    <text class='single'>{{item.people}}</text>
+    <text class='quan'>{{item.type}}</text>
+    <text class='num'>x{{item.num}}</text>
     <image class='use' src='../../image/use.png'></image>
   </view>
 </view>

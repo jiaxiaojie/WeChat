@@ -13,7 +13,7 @@
     <text class='item'>{{s2}}</text>
   </view>
   <view class='last'>
-    <text>预估剩余时长:</text><text>10</text>小时
+    <text>预估剩余时长:</text><text>{{time}}</text>小时
   </view>
 
 

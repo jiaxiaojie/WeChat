@@ -11,12 +11,42 @@ Page({
     day: Moment(new Date()).format('E')
   },
 
+//获得分时信息
   checkInTime: function () {
+    wx.request({
+      url: 'http://hotel.chengxu-tec.com/api/order', //仅为示例，并非真实的接口地址
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.errcode == 22) {
+          wx.navigateTo({
+            url: '../stayleng/stayleng',
+          })
+        }else{
+          wx.navigateTo({
+            url: '../unstay/unstay',
+          })
+        }
+      }
+    })
+  },
+ //查看卡券信息
+  viewCoupons:function(){
     wx.navigateTo({
-      url:'../stayleng/stayleng',
-    });
+      url: '../breakfast/breakfast',
+    })
   },
 
+//查看会员信息
+  viewMember:function(){
+    wx.navigateTo({
+      url: '../person/person',
+    })
+  },
+
+  //入住时间选择
   checkInDetail:function(){
   
     var dateInfo = JSON.stringify({
@@ -34,7 +64,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
     
   },
 

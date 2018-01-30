@@ -1,5 +1,5 @@
 <view class='content'>
   <image src='../../image/clock.png'></image>
   <text class='info'>暂未产生入住时间信息！</text>
-  <text class='goorder'>去订房</text>
+  <text class='goorder' bindtap='booking'>去订房</text>
 </view>
