@@ -1,9 +1,10 @@
 <view style='display: flex;justify-content: center;'>
   <view class='header'>
-    <image class='img'
-      src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image>
+    <!-- <image class='img'
+      src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image> -->
+      <image class='img'  bindtap="getUserAvatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text style='margin-top:28rpx;'>jin</text>
-    <text class='pay'>充值</text>
+    <text class='pay' bindtap='goReacharge'>充值</text>
     <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>{{remainder}}</text></view>
   </view>
 </view>
@@ -11,16 +12,22 @@
 <!--列表  -->
 <view class='tab'>
   <view class='item'>
+   <navigator url="../allorders/allorders" hover-class="navigator-hover">
     <image src='../../image/order.png'></image>
     <view>全部订单</view>
+   </navigator>
+  </view>
+  <view class='item'>
+    <navigator url="../breakfast/breakfast" hover-class="navigator-hover">
+      <image src='../../image/breakfast.png'></image>
+      <view>早餐券</view>
+    </navigator>
   </view>
    <view class='item'>
-    <image src='../../image/breakfast.png'></image>
-    <view>早餐券</view>
-  </view>
-   <view class='item'>
-    <image src='../../image/home.png'></image>
-    <view>待入住</view>
+    <navigator url="../allorders/allorders?tab=2" hover-class="navigator-hover">
+        <image src='../../image/home.png'></image>
+        <view>待入住</view>
+    </navigator>
   </view>
 </view>
 

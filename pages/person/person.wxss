@@ -79,3 +79,7 @@
          url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.ttf') format('truetype'),
          url('//at.alicdn.com/t/font_551179_mmj21d2qjafko6r.svg#iconfont') format('svg');
 }
+.navigator-hover{
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1
+}
