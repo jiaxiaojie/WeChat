@@ -1,17 +1,47 @@
 // pages/order/order.js
-Page({
 
+var Moment = require("../../utils/Moment.js");
+
+var daysDiffer = function (indate, outdate) {
+  if (typeof indate === 'string' && typeof outdate === 'string') {
+    indate = new Date(indate);
+    outdate = new Date(outdate);
+  } else {
+    var curDate = new Date();
+    indate = curDate;
+    outdate = new Date(curDate.getTime() + 24 * 60 * 60 * 1000);//后一天
+  }
+  var time1 = indate.getTime();
+  var time2 = outdate.getTime();
+  var differ = Math.ceil((time2 - time1) / (1000 * 3600 * 24));//除不尽时,向上取整
+  return differ;
+}
+
+Page({
+  bookingInformation:null,
   /**
    * 页面的初始数据
    */
   data: {
-    num:1,
+    checkinDate:null,
+    checkoutDate: null,
+    stayNightNumber: null
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.bookingInformation = JSON.parse(options.bookingInformation);
+    console.log(this.bookingInformation);
+    var roomRegisterDateInfo = this.bookingInformation.roomBookingDateInfo;
+    var differ = daysDiffer(roomRegisterDateInfo.inDate, roomRegisterDateInfo.outDate);
+    this.setData({
+      // checkinDate: "" + (roomRegisterDateInfo.inDate.getMoth() + 1) + "月" + roomRegisterDateInfo.inDate.getDate()+"日",
+      // checkoutDate: "" + (roomRegisterDateInfo.outDate.getMoth() + 1) + "月" + roomRegisterDateInfo.outDate.getDate() + "日",
+      checkinDate: roomRegisterDateInfo.inDate,
+      checkoutDate: roomRegisterDateInfo.outDate,
+      stayNightNumber: differ
+    })
   },
 
   /**

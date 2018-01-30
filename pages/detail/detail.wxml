@@ -63,7 +63,7 @@
       </view>
       <view class='intro'>{{item.info}}</view>
       <view class='time'>¥{{item.vipprice}}元/小时</view>
-      <view class='order'>预定</view>
+      <view class='order' data-typeindex="{{index}}" bindtap="bookingRoom" >预定</view>
     </view>
   </view>
 </view>

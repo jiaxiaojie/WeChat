@@ -12,7 +12,7 @@
 <!--列表  -->
 <view class='tab'>
   <view class='item'>
-   <navigator url="../allorders/allorders" hover-class="navigator-hover">
+   <navigator url="../allorders/allorders?tab=0" hover-class="navigator-hover">
     <image src='../../image/order.png'></image>
     <view>全部订单</view>
    </navigator>

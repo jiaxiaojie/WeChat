@@ -72,6 +72,7 @@ Moment.prototype.differ =function(date){
     return differ;
 }
 
+
 Moment.prototype.add = function(num,optionType){
     var date = this.date;
     if('day' === optionType){

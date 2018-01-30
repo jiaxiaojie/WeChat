@@ -2,13 +2,13 @@
   <view class='title'>苏州缀美主题酒店</view>
   <view class='info'>
     <view>入住:
-      <text style="color:#000;">12月7日</text>
+      <text style="color:#000;">{{checkinDate}}</text>
     </view>
     <view style='margin-left:170rpx;margin-right:130rpx;'>离店:
-      <text style="color:#000;">12月8日</text>
+      <text style="color:#000;">{{checkoutDate}}</text>
     </view>
     <view>共
-      <text>1</text>晚</view>
+      <text>{{stayNightNumber}}</text>晚</view>
   </view>
   <view class='footer'>苏州管前街1100号</view>
 </view>
