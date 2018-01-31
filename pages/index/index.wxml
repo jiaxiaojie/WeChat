@@ -11,7 +11,7 @@
 
 <!--列表  -->
 <view class='tab'>
-  <view class='item' bindtap="checkInTime" >
+  <view class='item' bindtap='checkInTime' >
     <image src='../../image/time.png'></image>
     <view>分时信息</view>
   </view>

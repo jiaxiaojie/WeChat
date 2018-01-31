@@ -1,4 +1,5 @@
 // pages/stayleng/stayleng.js
+var request = require("../../utils/Request.js");
 Page({
 
   /**
@@ -18,20 +19,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    var that = this
-    wx.request({
-      url: 'http://hotel.chengxu-tec.com/api/order', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        that.time_fun("2018-01-29 12:00:00");
-        that.setData({
-          time:res.data.errcode
-        })
-      }
-    })
+    var that = this;
+    var requestUrl = "/order";
+    var jsonData = {
+      code: 1
+    };
+    request.httpsGetRequest(requestUrl, jsonData, function (res) {
+      that.time_fun("2018-01-29 12:00:00");
+      that.setData({
+        time: 44
+      })
+    });
   },
   two_char(n) {
     return n >= 10 ? n : "0" + n;

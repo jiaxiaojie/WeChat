@@ -1,4 +1,5 @@
 // pages/person/person.js
+var request = require("../../utils/Request.js");
 //获取应用实例
 const app = getApp()
 
@@ -9,29 +10,18 @@ Page({
    */
   data: {
     remainder:0,
-    userInfo: {},
-    hasUserInfo: false
+    userAvatarUrl: '',
   },
 //获取头像
   getUserAvatar:function(){
-    console.info(app.globalData.userInfo);
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+    var that = this;
+    app._getUserInfo(function (userInfo) {
+      that.setData({
+        userAvatarUrl: app.globalData.g_userInfo.avatarUrl,
+        _userInfo: userInfo
       })
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+      console.log('用户', that.data._userInfo)
+    })
   },
   //充值
   goReacharge:function(){
@@ -45,17 +35,10 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getUserAvatar();
-    wx.request({
-      url: 'http://hotel.chengxu-tec.com/api/order', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          remainder:"7:20-9:00"
-        })
-      }
+    request.httpsGetRequest('/order', '', function (res) {
+      that.setData({
+        remainder: "7:20-9:00"
+      })
     })
   },
 

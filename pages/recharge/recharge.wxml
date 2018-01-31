@@ -1,8 +1,27 @@
-<input class='money' type='text' placeholder='请输入您的充值金额'></input>
-<view class='time'>预计可使用时间为：10小时-20小时</view>
-<view class='coupon'>
-  <text>优惠券</text>
-  <text style='color:#999;margin-left:60rpx;'>请选择可使用优惠券</text>
-  <image src='../../image/arrow.png'></image>
-</view>
-<view class='gopay'>充值</view>
+ <form bindsubmit="formSubmit">
+    <input class='money' type='number' bindinput="bindAmount"  value='{{rAmount}}' placeholder='请输入您的充值金额'></input>
+    <view class='time'>{{rAmount}}预计可使用时间为：10小时-20小时</view>
+    <view class='coupon'>
+      <text>优惠券</text>
+      <text style='color:#999;margin-left:60rpx;'>请选择可使用优惠券</text>
+      <image src='../../image/arrow.png'></image>
+    </view>
+    <button class='gopay' formType="submit">充值</button>
+</form> 
+
+
+<!-- <form bindsubmit="formSubmit">
+    <view class="txt">
+      <view class="ima"></view>
+      <view class="txt2">姓名</view>
+      <input placeholder="请输入姓名" maxlength="10" class="txt3" value="{{mem_name}}" bindchange="name" name="name2"/>
+    </view>
+    <view class="txt">
+      <view class="ima"></view>
+      <view class="txt2">身份证号</view>
+      <input type="idcard" placeholder="请输入身份证号码" class="txt3"   value="{{mem_IDnum}}" bindchange="ID_num" maxlength="18" name="ID_num2"/>
+    </view>
+    <view style="clear:both"></view>
+    <button class="btn" form-type="submit" hover-class="none">完成</button>
+  </form> -->
+

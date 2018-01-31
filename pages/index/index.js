@@ -1,5 +1,5 @@
 var Moment = require("../../utils/Moment.js");
-
+var request = require("../../utils/Request.js");
 Page({
 
   /**
@@ -13,24 +13,26 @@ Page({
 
 //获得分时信息
   checkInTime: function () {
-    wx.request({
-      url: 'http://hotel.chengxu-tec.com/api/order', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        if (res.data.errcode == 22) {
-          wx.navigateTo({
-            url: '../stayleng/stayleng',
-          })
-        }else{
-          wx.navigateTo({
-            url: '../unstay/unstay',
-          })
-        }
-      }
-    })
+    var requestUrl = "/order";
+    var jsonData = {
+      code: 1
+    };
+    console.log("go stayleng" )
+    request.httpsGetRequest(requestUrl,jsonData,function (res) {
+      console.log(res)
+      wx.navigateTo({
+        url: '../stayleng/stayleng',
+      })
+      // if (res.data.errcode !== 0) {
+      //   wx.navigateTo({
+      //     url: '../stayleng/stayleng',
+      //   })
+      // } else {
+      //   wx.navigateTo({
+      //     url: '../unstay/unstay',
+      //   })
+      // }
+    });
   },
  //查看卡券信息
   viewCoupons:function(){

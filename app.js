@@ -4,35 +4,74 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    // 登录
+    var that = this;
+    // 调用登录接口，获取 code
     wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+      success: function (res) {
+        console.log(res.code);
+        //判断用户是否授权读取用户信息 start
+        wx.getSetting({
+          success(setRes) {
+            if (!setRes.authSetting['scope.userInfo']) {
+              // 授权访问 start
+              wx.authorize({
+                scope: 'scope.userInfo',
+                success() {
+                  //发起网络请求
+                  wx.request({
+                    url: that.globalData.host+ '/member/miniapp-login',
+                    data: { code: res.code },
+                    method: 'GET',
+                    success: function (result) {
+                      var data = result.data;
+                      console.log(data)
+                      that.globalData.session_key = result.data.session
+                      console.log('that.globalData.session_key ' + that.globalData.session_key)
+                    }
+                  })
+                }
+              })
+              // 授权访问 end
+            } 
+            else {
+              wx.request({
+                url: that.globalData.host + '/member/miniapp-login',
+                data: { code: res.code },
+                method: 'GET',
+                success: function (result) {
+                  var data = result.data;
+                  console.log(data)
+                  that.globalData.session_key = result.data.session
+                  console.log('that.globalData.session_key ' + that.globalData.session_key)
+                }
+              })
             }
-          })
-        }
+          }
+        })
+        // 判断用户是否授权读取用户信息 end
+
+      },
+      fail: function () {
+        console.log('登录时网络错误')
       }
     })
+    
   },
-  globalData: {
-    userInfo: null
+
+//获取用户信息
+  _getUserInfo: function (cb) {
+    var that = this
+    if (this.globalData.g_userInfo) {
+      typeof cb == "function" && cb(this.globalData.g_userInfo)
+    } else {
+      wx.getUserInfo({
+        success: function (res) {
+          console.log('用户信息', res.userInfo)
+          that.globalData.g_userInfo = res.userInfo
+          typeof cb == "function" && cb(that.globalData.g_userInfo)
+        }
+      })
+    }
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
@@ -53,5 +92,10 @@ App({
    */
   onError: function (msg) {
     
+  },
+  globalData: {
+    g_userInfo: null,
+    session_key: "",
+    host:"https://hotel.chengxu-tec.com/api"
   }
 })

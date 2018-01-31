@@ -1,11 +1,38 @@
 // pages/recharge/recharge.js
+var request = require("../../utils/Request.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    rAmount:''
+  },
+  // bindAmount:function(e){
+  //   this.setData({
+  //     rAmount: e.detail.value
+  //   })
+  // },
+  // formSubmit:function(e){
+  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  // },
+
+
+
+  name: function (e) {   //获取input输入的值
+    var that = this;
+    that.setData({
+      name: e.detail.value
+    })
+  },
+  formSubmit: function (e) {
+    var that = this;
+    var name2 = e.detail.value.name2;         //获取input初始值
+    var name = that.data.name ? that.data.name : name2    //三元运算，如果用户没修改信息，直接提交原来的信息，如果用户修改了信息，就将修改了的信息和未修改过的信息一起提交
+    request.httpsPostRequest('/pay/custom-pay', name, function (res) {
+      console.log(res)
+      
+    })
   },
 
   /**
