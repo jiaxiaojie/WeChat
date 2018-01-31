@@ -11,13 +11,15 @@ Page({
   data: {
     remainder:0,
     userAvatarUrl: '',
+    userName:''
   },
-//获取头像
+//获取用户微信信息
   getUserAvatar:function(){
     var that = this;
     app._getUserInfo(function (userInfo) {
       that.setData({
         userAvatarUrl: app.globalData.g_userInfo.avatarUrl,
+        nickName:app.globalData.g_userInfo.nickName,
         _userInfo: userInfo
       })
       console.log('用户', that.data._userInfo)

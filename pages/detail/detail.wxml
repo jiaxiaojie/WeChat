@@ -38,46 +38,31 @@
 </view>
 
 <view class='items' style="padding:0 180rpx;">
-  <view class="home {{tabArr.curHdIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0" bindtap="tabFun">分时房</view>
-  <view class="home {{tabArr.curHdIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1" bindtap="tabFun">天时房</view>
+  <view class="home {{currentTabIndex=='0'? 'active' : ''}}" id="tab-hd01" data-id="0" bindtap="tabFun">分时房</view>
+  <view class="home {{currentTabIndex=='1'? 'active' : ''}}" id="tab-hd02" data-id="1" bindtap="tabFun">天时房</view>
 </view>
 <!-- list start-->
-<view class="tabContainer {{tabArr.curBdIndex=='0'? 'active' : ''}}">
-  <view wx:for="{{roomList}}" wx:key="id">
-    <view class='items' data-typeindex="{{index}}" bindtap="foldFn">
+<view class="tabContainer active">
+  <view wx:for="{{roomInformation}}" wx:key="id">
+    <view class='items' data-typeindex="{{index}}"  bindtap="foldFn">
       <view class='item_left' style='pointer-events: none'>
-        <text style='font-size:28rpx;color:#333;'>{{item.name}}</text>
+        <text style='font-size:28rpx;color:#333;'>{{item.house_name}}</text>
         <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
       </view>
-      <view style='font-size:24rpx;color:#666;pointer-events: none'>¥ {{item.price}}元/小时起
+      <view style='font-size:24rpx;color:#666;pointer-events: none'>¥ {{item.house_price}}元/小时起
         <text style='font-size:22rpx; color:#999;margin-right:20rpx;'>（门市价）</text>
         <image style='width: 22rpx;height: 12rpx;' src='../../image/upangel.png'></image>
       </view>
     </view>
-
     <view class="items" style='background:#F8F8F8;' hidden="{{index != currentDetailIndex }}">
       <view class='member'>
         会员价
         <text class="iconfont icon-wenhao" style='margin-left:10rpx;'></text>
-        <view style='font-size:22rpx; color:#999;'>仅剩{{item.num}}间</view>
+        <view style='font-size:22rpx; color:#999;'>仅剩1间</view>
       </view>
-      <view class='intro'>{{item.info}}</view>
-      <view class='time'>¥{{item.vipprice}}元/小时</view>
+      <view class='intro'>{{item.roomType}}/无窗/{{item.breakfast}}早{{item.info}}</view>
+      <view class='time'>¥{{item.member_house_price}}元/小时</view>
       <view class='order' data-typeindex="{{index}}" bindtap="bookingRoom" >预定</view>
     </view>
   </view>
 </view>
-<view class="tabContainer {{tabArr.curBdIndex=='1'? 'active' : ''}}">222222</view>
-<!-- list end -->
-
-
-<!-- <view class='items'>
-  <view>
-    <text style='font-size:28rpx;color:#333;'>大床双人间</text>
-    <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
-  </view>
-  <view style='font-size:26rpx;color:#E2231A;'>
-    <text style='margin-right:20rpx;'>¥12元/小时起 </text>  
-    <image style='width: 22rpx;height: 12rpx;transform:rotate(180deg);'src='../../image/upangel.png'></image>     
-  </view>
-</view> -->

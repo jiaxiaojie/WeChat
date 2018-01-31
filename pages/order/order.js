@@ -32,16 +32,15 @@ Page({
    */
   onLoad: function (options) {
     this.bookingInformation = JSON.parse(options.bookingInformation);
-    console.log(this.bookingInformation);
+    ///console.log(this.bookingInformation);
     var roomRegisterDateInfo = this.bookingInformation.roomBookingDateInfo;
     var differ = daysDiffer(roomRegisterDateInfo.inDate, roomRegisterDateInfo.outDate);
     this.setData({
-      // checkinDate: "" + (roomRegisterDateInfo.inDate.getMoth() + 1) + "月" + roomRegisterDateInfo.inDate.getDate()+"日",
-      // checkoutDate: "" + (roomRegisterDateInfo.outDate.getMoth() + 1) + "月" + roomRegisterDateInfo.outDate.getDate() + "日",
       checkinDate: roomRegisterDateInfo.inDate,
       checkoutDate: roomRegisterDateInfo.outDate,
       stayNightNumber: differ
-    })
+    });
+    
   },
 
   /**

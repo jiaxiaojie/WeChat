@@ -23,10 +23,9 @@ App({
                     data: { code: res.code },
                     method: 'GET',
                     success: function (result) {
-                      var data = result.data;
-                      console.log(data)
-                      that.globalData.session_key = result.data.session
-                      console.log('that.globalData.session_key ' + that.globalData.session_key)
+                      var data = result.data.data;                      
+                      that.globalData.session_key = data.session;
+                      //console.log('that.globalData.session_key ' + that.globalData.session_key)
                     }
                   })
                 }
@@ -39,10 +38,10 @@ App({
                 data: { code: res.code },
                 method: 'GET',
                 success: function (result) {
-                  var data = result.data;
-                  console.log(data)
-                  that.globalData.session_key = result.data.session
-                  console.log('that.globalData.session_key ' + that.globalData.session_key)
+                  var data = result.data.data;
+                 /// console.log(result)
+                  that.globalData.session_key = data.session
+                  //console.log('that.globalData.session_key ' + that.globalData.session_key)
                 }
               })
             }

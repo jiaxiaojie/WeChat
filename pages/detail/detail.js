@@ -17,53 +17,42 @@ var daysDiffer = function (indate,outdate) {
 }
 
 Page({
- roomInformation: [
-    { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
-    { id: 2, name: "大床双人间", price: 15, vipprice: 14, info: "大床/有窗/双早", num: 3 },
-    { id: 1, name: "标准单人间", price: 13, vipprice: 12, info: "单人床/无窗/无早", num: 2 },
-  ],
- roomRegisterDateInfo: null,
+  roomInformation:[],
+  roomRegisterDateInfo: null,
+  currentTabIndex:0,
+  currentDetailIndex: 0,
   /**
    * 页面的初始数据
    */
   data: {
     checkInDate:0,
     checkInDays:0,
-    roomList: null,
-    tabArr: {
-      curHdIndex: 0,
-      curBdIndex: 0
-    },
+    roomInformation: null,
     isFold:true,
-    currentDetailIndex:0,
-    
+    //currentDetailIndex:0,    
   },
 // tab 选项卡
   tabFun: function (e) {
     //获取触发事件组件的dataset属性  
-    var _datasetId = e.target.dataset.id;
-    var _obj = {};
-    _obj.curHdIndex = _datasetId;
-    _obj.curBdIndex = _datasetId;
+    this.currentTabIndex = e.target.dataset.id;
+    this.listCurrentRoom();
     this.setData({
-      tabArr: _obj
+      currentTabIndex: e.target.dataset.id
     });
   },
 
   // 展开
   foldFn: function (e) {
-    //var _foldIndex = e.target.dataset.index;
-    //console.info(_foldIndex)
-    //currentDetailIndex = e.target.dataset.index;
+    this.currentDetailIndex = e.target.dataset.typeindex;
     this.setData({
-      currentDetailIndex: e.target.dataset.typeindex
+      currentDetailIndex: this.currentDetailIndex,
     });
   },
   //预定指定房型的房间
   bookingRoom: function (e) {
     if (e.target.dataset.hasOwnProperty("typeindex")){
       var roomTypeIndex = e.target.dataset.typeindex;
-      console.log(roomTypeIndex);
+      ///console.log(roomTypeIndex);
       var bookingInformation = this.roomInformation[roomTypeIndex];
       bookingInformation.roomBookingDateInfo = this.roomRegisterDateInfo;
       wx.navigateTo({
@@ -77,19 +66,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;  
-
+    var that = this;
     this.roomRegisterDateInfo = JSON.parse(options.dateInfo);
-    ///console.log(this.roomRegisterDateInfo)
     var differ = daysDiffer(this.roomRegisterDateInfo.inDate,                this.roomRegisterDateInfo.outDate);
     that.setData({
       checkInDate: Moment(new Date(this.roomRegisterDateInfo.inDate)).format('MM-dd'),
       checkInDays: differ,
-      roomList: this.roomInformation,
-      currentDetailIndex:0
+      currentDetailIndex: that.currentDetailIndex,
+      currentTabIndex: that.currentTabIndex
     }) ;
+    this.listCurrentRoom();    
   },
 
+  listCurrentRoom: function(){
+    var that = this;
+    wx.request({
+      url: getApp().globalData.host + '/room',
+      data: { session: getApp().globalData.session_key },
+      method: 'GET',
+      success: function (result) {
+        console.log(result);
+        that.roomInformation = [];
+        var rooms = result.data.data.rooms;
+        var house_type = result.data.data.house_type;
+        for (var index in rooms) {
+          var charge_type = rooms[index].charge_type;
+          if (charge_type == that.currentTabIndex) {
+            that.roomInformation.push(rooms[index]);
+          } else {
+            console.log(charge_type, that.currentTabIndex);
+          }
+        }
+        //console.log(that.roomInformation);
+        for (var index in that.roomInformation) {
+          var roomType = that.roomInformation[index].house_type_id;
+          ///console.log(roomType);
+          that.roomInformation[index].roomType = house_type[roomType];
+        }
+
+        that.setData({
+          roomInformation: that.roomInformation
+        });
+        console.log(that.roomInformation);
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

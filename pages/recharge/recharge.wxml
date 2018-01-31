@@ -1,6 +1,6 @@
  <form bindsubmit="formSubmit">
-    <input class='money' type='number' bindinput="bindAmount"  value='{{rAmount}}' placeholder='请输入您的充值金额'></input>
-    <view class='time'>{{rAmount}}预计可使用时间为：10小时-20小时</view>
+    <input class='money' type='number' name="amount" bindinput='bindAmountMoney' placeholder='请输入您的充值金额'></input>
+    <view class='time'>预计可使用时间为：{{minTime}}小时-{{maxTime}}小时</view>
     <view class='coupon'>
       <text>优惠券</text>
       <text style='color:#999;margin-left:60rpx;'>请选择可使用优惠券</text>

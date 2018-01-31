@@ -6,33 +6,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-    rAmount:''
+    amountMoney:'',
+    minTime:0,
+    maxTime:0
   },
-  // bindAmount:function(e){
-  //   this.setData({
-  //     rAmount: e.detail.value
-  //   })
-  // },
-  // formSubmit:function(e){
-  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
-  // },
-
-
-
-  name: function (e) {   //获取input输入的值
-    var that = this;
-    that.setData({
-      name: e.detail.value
-    })
+  bindAmountMoney:function(e){
+      this.setData({
+        amountMoney:e.detail.value,
+        minTime: e.detail.value*2,
+        maxTime:e.detail.value*3
+      })
   },
   formSubmit: function (e) {
-    var that = this;
-    var name2 = e.detail.value.name2;         //获取input初始值
-    var name = that.data.name ? that.data.name : name2    //三元运算，如果用户没修改信息，直接提交原来的信息，如果用户修改了信息，就将修改了的信息和未修改过的信息一起提交
-    request.httpsPostRequest('/pay/custom-pay', name, function (res) {
-      console.log(res)
-      
-    })
+    if (e.detail.value.amount.length == 0) {
+      wx.showToast({
+        title: '金额不得为空!',
+        icon:'loading',
+        duration: 1500
+      })
+      setTimeout(function () {
+        wx.hideToast()
+      }, 2000)
+    } 
+    else{
+      var data = {
+        sum:990
+      };
+      request.httpsPostRequest('/pay/custom-pay', data, function (res) {
+        wx.showToast({
+          title: 'res.errMsg',
+          icon: 'loading',
+          duration: 1500
+        })
+        setTimeout(function () {
+          wx.hideToast()
+        }, 2000)
+      })
+    }
   },
 
   /**
