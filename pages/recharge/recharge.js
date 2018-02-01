@@ -15,8 +15,8 @@ Page({
   bindAmountMoney:function(e){
       this.setData({
         amountMoney:e.detail.value,
-        minTime: e.detail.value / timePrice,
-        maxTime: e.detail.value / memberTimePrice
+        minTime: e.detail.value/this.data.timePrice,
+        maxTime: e.detail.value/this.data.memberTimePrice
       })
   },
   formSubmit: function (e) {
@@ -74,11 +74,12 @@ Page({
       let data = res.data;
       console.log(data)
       let houseListFrist = data.rooms[0];
-      console.log(houseListFrist)
+      
       that.setData({
        memberTimePrice : houseListFrist.member_timekeeping_price,
-       timePrice : houseListFrist.timekeeping_price
+       timePrice: houseListFrist.timekeeping_price
       });
+      console.log(that.data.memberTimePrice + '**' + that.data.timePrice)
       
     });
   },

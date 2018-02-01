@@ -9,10 +9,10 @@
 <!--全部  -->
 <view style="display:{{currentTab==0 ? '' : 'none'}}">
   <!--已入住  -->
-  <view class='item itemed'>
+  <view class='item itemed' wx:for="{{allOrders}}" wx:key="id">
     <view class='up'>
       <view class='one'>
-        <text class='title'>缀美主题酒店</text>
+        <text class='title'>{{item.house_name}}</text>
         <view class='chotel'>已入住</view>
       </view>
       <view class='two'> 

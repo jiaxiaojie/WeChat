@@ -39,11 +39,20 @@ Page({
       session:getApp().globalData.session_key
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      console.log(res.data)
-      that.setData({
-        allOrders : res.data.orders
-      }) 
-      console.info(that.allOrders)
+      console.log(res)
+      if(res.data.code == 0){
+        that.setData({
+          allOrders: res.data.orders
+        })
+        console.info(that.data.allOrders)
+      }else{
+        wx.showToast({
+          title: res.data.errmsg,
+          icon:'none',
+          duration:2000
+        })
+      }
+      
     })
   },
 
