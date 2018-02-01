@@ -9,19 +9,3 @@
     <button class='gopay' formType="submit">充值</button>
 </form> 
 
-
-<!-- <form bindsubmit="formSubmit">
-    <view class="txt">
-      <view class="ima"></view>
-      <view class="txt2">姓名</view>
-      <input placeholder="请输入姓名" maxlength="10" class="txt3" value="{{mem_name}}" bindchange="name" name="name2"/>
-    </view>
-    <view class="txt">
-      <view class="ima"></view>
-      <view class="txt2">身份证号</view>
-      <input type="idcard" placeholder="请输入身份证号码" class="txt3"   value="{{mem_IDnum}}" bindchange="ID_num" maxlength="18" name="ID_num2"/>
-    </view>
-    <view style="clear:both"></view>
-    <button class="btn" form-type="submit" hover-class="none">完成</button>
-  </form> -->
-

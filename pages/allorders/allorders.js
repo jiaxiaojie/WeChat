@@ -1,11 +1,14 @@
 // pages/allorders/allorders.js
+var Moment = require("../../utils/Moment.js");
+var request = require("../../utils/Request.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab:0
+    currentTab:0,
+    allOrders:[]
   },
   swichNav: function (e) {
     var that = this;
@@ -22,12 +25,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     console.log(options)
     if (options){
       this.setData({
         currentTab: options.tab
       })
-    }
+    };
+
+    //获取用户的全部订单
+    var requestUrl = "/order";
+    var jsonData = {
+      session:getApp().globalData.session_key
+    };
+    request.httpsGetRequest(requestUrl, jsonData, function (res) {
+      console.log(res.data)
+      that.setData({
+        allOrders : res.data.orders
+      }) 
+      console.info(that.allOrders)
+    })
   },
 
   /**

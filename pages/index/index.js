@@ -13,26 +13,45 @@ Page({
 
 //获得分时信息
   checkInTime: function () {
-    var requestUrl = "/order";
+    var requestUrl = "/order/current";
     var jsonData = {
-      code: 1
+      session: getApp().globalData.session_key
     };
-    console.log("go stayleng" )
-    request.httpsGetRequest(requestUrl,jsonData,function (res) {
+    console.log(getApp().globalData.session_key )
+    request.httpsGetRequest(requestUrl, jsonData, function (res) {
       console.log(res)
-      wx.navigateTo({
-        url: '../stayleng/stayleng',
-      })
-      // if (res.data.errcode !== 0) {
-      //   wx.navigateTo({
-      //     url: '../stayleng/stayleng',
-      //   })
-      // } else {
-      //   wx.navigateTo({
-      //     url: '../unstay/unstay',
-      //   })
-      // }
-    });
+      if (res.errcode == 0) {
+        wx.navigateTo({
+          url: '../stayleng/stayleng',
+        })
+
+      } else {
+        wx.navigateTo({
+          url: '../unstay/unstay',
+        })
+      }
+    })
+
+
+    // wx.request({
+    //   url: requestUrl, 
+    //   data:{
+    //     session: getApp().globalData.session_key
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     if (res.data.errcode !== 0) {
+    //       wx.navigateTo({
+    //         url: '../stayleng/stayleng',
+    //       })
+          
+    //     } else {
+    //       wx.navigateTo({
+    //         url: '../unstay/unstay',
+    //       })
+    //     }
+    //   }
+    // })
   },
  //查看卡券信息
   viewCoupons:function(){

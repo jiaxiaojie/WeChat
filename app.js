@@ -8,10 +8,10 @@ App({
     // 调用登录接口，获取 code
     wx.login({
       success: function (res) {
-        console.log(res.code);
         //判断用户是否授权读取用户信息 start
         wx.getSetting({
           success(setRes) {
+            
             if (!setRes.authSetting['scope.userInfo']) {
               // 授权访问 start
               wx.authorize({
@@ -22,10 +22,11 @@ App({
                     url: that.globalData.host+ '/member/miniapp-login',
                     data: { code: res.code },
                     method: 'GET',
-                    success: function (result) {
-                      var data = result.data.data;                      
+                    success: function (loginResult) {
+                      var data = loginResult.data.data;
+                      console.info(data.session)
                       that.globalData.session_key = data.session;
-                      //console.log('that.globalData.session_key ' + that.globalData.session_key)
+                      that.globalData.m_remain_time = data.remain_time;
                     }
                   })
                 }
@@ -37,11 +38,11 @@ App({
                 url: that.globalData.host + '/member/miniapp-login',
                 data: { code: res.code },
                 method: 'GET',
-                success: function (result) {
-                  var data = result.data.data;
-                 /// console.log(result)
-                  that.globalData.session_key = data.session
-                  //console.log('that.globalData.session_key ' + that.globalData.session_key)
+                success: function (loginResult) {
+                  var data = loginResult.data.data;
+                  console.info(data.session)
+                  that.globalData.session_key = data.session;
+                  that.globalData.m_remain_time = data.remain_time;
                 }
               })
             }
@@ -95,6 +96,7 @@ App({
   globalData: {
     g_userInfo: null,
     session_key: "",
+    m_remain_time:'',
     host:"https://hotel.chengxu-tec.com/api"
   }
 })

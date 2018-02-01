@@ -8,39 +8,54 @@ Page({
   data: {
     amountMoney:'',
     minTime:0,
-    maxTime:0
+    maxTime:0,
+    memberTimePrice:0,
+    timePrice:0
   },
   bindAmountMoney:function(e){
       this.setData({
         amountMoney:e.detail.value,
-        minTime: e.detail.value*2,
-        maxTime:e.detail.value*3
+        minTime: e.detail.value / timePrice,
+        maxTime: e.detail.value / memberTimePrice
       })
   },
   formSubmit: function (e) {
     if (e.detail.value.amount.length == 0) {
       wx.showToast({
         title: '金额不得为空!',
-        icon:'loading',
-        duration: 1500
+        icon:'none',
+        duration: 2000
       })
-      setTimeout(function () {
-        wx.hideToast()
-      }, 2000)
     } 
     else{
       var data = {
-        sum:990
+        session:getApp().globalData.session_key,
+        sum: e.detail.value.amount
       };
       request.httpsPostRequest('/pay/custom-pay', data, function (res) {
-        wx.showToast({
-          title: 'res.errMsg',
-          icon: 'loading',
-          duration: 1500
-        })
-        setTimeout(function () {
-          wx.hideToast()
-        }, 2000)
+        console.log(res)
+        if(res.errcode !== 0){
+          console.log('go recharge')
+          wx.requestPayment({
+            'timeStamp': '222',
+            'nonceStr': '',
+            'package': '',
+            'signType': 'MD5',
+            'paySign': '',
+            'success': function (res) {
+              console.log(res.errMsg)
+            },
+            'fail': function (res) {
+              console.log(res.errMsg)
+            }
+          })
+        }else{
+          wx.showToast({
+            title: res.errmsg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       })
     }
   },
@@ -49,7 +64,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    console.log(getApp().globalData.session_key)
+    var session = {
+      session: getApp().globalData.session_key
+    };
+     //获取房间价格
+    request.httpsGetRequest('/room', session,function(res){
+      let data = res.data;
+      console.log(data)
+      let houseListFrist = data.rooms[0];
+      console.log(houseListFrist)
+      that.setData({
+       memberTimePrice : houseListFrist.member_timekeeping_price,
+       timePrice : houseListFrist.timekeeping_price
+      });
+      
+    });
   },
 
   /**

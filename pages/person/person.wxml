@@ -5,7 +5,7 @@
       <image class='img' src="{{userAvatarUrl}}" background-size="cover"></image>
     <text style='margin-top:28rpx;'>{{nickName}}</text>
     <text class='pay' bindtap='goReacharge'>充值</text>
-    <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>{{remainder}}</text></view>
+    <view class='info'>剩余入住时长(预估)：<text style='color:#000;'>{{remainTime}}分钟</text></view>
   </view>
 </view>
 

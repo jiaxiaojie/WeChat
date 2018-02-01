@@ -1,15 +1,14 @@
 // pages/person/person.js
 var request = require("../../utils/Request.js");
 //获取应用实例
-const app = getApp()
-
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    remainder:0,
+    remainTime: '',
     userAvatarUrl: '',
     userName:''
   },
@@ -19,10 +18,8 @@ Page({
     app._getUserInfo(function (userInfo) {
       that.setData({
         userAvatarUrl: app.globalData.g_userInfo.avatarUrl,
-        nickName:app.globalData.g_userInfo.nickName,
-        _userInfo: userInfo
+        nickName:app.globalData.g_userInfo.nickName
       })
-      console.log('用户', that.data._userInfo)
     })
   },
   //充值
@@ -37,10 +34,9 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getUserAvatar();
-    request.httpsGetRequest('/order', '', function (res) {
-      that.setData({
-        remainder: "7:20-9:00"
-      })
+    console.log(app.globalData)
+    that.setData({
+      remainTime: app.globalData.m_remain_time
     })
   },
 

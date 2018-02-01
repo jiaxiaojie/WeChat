@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    time:10,
+    time:0,
     h1:0,
     h2:0,
     m1:0,
@@ -20,14 +20,14 @@ Page({
    */
   onLoad: function () {
     var that = this;
-    var requestUrl = "/order";
+    var requestUrl = "/order/current"
     var jsonData = {
-      code: 1
+      session: getApp().globalData.session_key
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      that.time_fun("2018-01-29 12:00:00");
+      that.time_fun(res.data.check_in_time);
       that.setData({
-        time: 44
+        time: parseInt(res.data.remain_time)
       })
     });
   },
@@ -35,16 +35,17 @@ Page({
     return n >= 10 ? n : "0" + n;
   },
   //计时器
-  time_fun(inDate) {
+  time_fun(checkTime) {
+    console.info(checkTime)
     var sec= 0;
     var that=this;
     var stime=setInterval(function () {
       sec++;
-      // var date = new Date(0, 0)
-      var checkInDate = new Date(inDate);
-      var curDate = new Date();
+      // var checkInDate = new Date('2018-02-01 12:00:00');
+      // var curDate = new Date();
       //时间差的毫秒数
-      var differTime = curDate.getTime() - checkInDate.getTime();
+      // var differTime = curDate.getTime() - checkInDate.getTime();
+      var differTime = checkTime*1000 + sec*1000;
 
       //计算相差小时数
       var hours = Math.floor(differTime / (3600 * 1000));
@@ -57,9 +58,7 @@ Page({
        //计算分钟数后剩余的毫秒数  
       var leave2 = leave1 % (60 * 1000)     
       var seconds = Math.round(leave2 / 1000)
-    
       // date.setSeconds(sec);
-      // console.info(date);
       // var h = that.two_char(date.getHours());
       // var m = that.two_char(date.getMinutes());
       // var s = that.two_char(date.getSeconds());
