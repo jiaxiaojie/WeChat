@@ -1,14 +1,18 @@
 var Moment = require("../../utils/Moment.js");
 var request = require("../../utils/Request.js");
-Page({
+var DateUtils = require("../../utils/DateUtils.js");
 
+Page({
+  g_checkInDate: null,
+  g_checkOutDate: null,
   /**
    * 页面的初始数据
    */
   data: {
       //默认日期&时间
-    checkInDate: Moment(new Date()).format('yyyy-MM-dd'),
-    day: Moment(new Date()).format('E')
+    checkInDate:"",
+    checkOutDate:"",
+    weekDay: ""
   },
 
 //获得分时信息
@@ -19,7 +23,7 @@ Page({
     };
     console.log(getApp().globalData.session_key )
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      console.log(res)
+      ///console.log(res)
       if (res.errcode == 0) {
         wx.navigateTo({
           url: '../stayleng/stayleng',
@@ -31,27 +35,6 @@ Page({
         })
       }
     })
-
-
-    // wx.request({
-    //   url: requestUrl, 
-    //   data:{
-    //     session: getApp().globalData.session_key
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data)
-    //     if (res.data.errcode !== 0) {
-    //       wx.navigateTo({
-    //         url: '../stayleng/stayleng',
-    //       })
-          
-    //     } else {
-    //       wx.navigateTo({
-    //         url: '../unstay/unstay',
-    //       })
-    //     }
-    //   }
-    // })
   },
  //查看卡券信息
   viewCoupons:function(){
@@ -68,25 +51,51 @@ Page({
   },
 
   //入住时间选择
-  checkInDetail:function(){
-  
-    var dateInfo = JSON.stringify({
-      inDate: this.data.checkInDate,
-      outDate: this.data.checkOutDate
+  checkInDetail:function(){  
+    var CheckInOutDate = JSON.stringify({
+      inDate: this.g_checkInDate,
+      outDate: this.g_checkOutDate
     })
-    console.info(dateInfo)
+    //console.info(CheckInOutDate)
     wx.navigateTo({
-      url: "../detail/detail?dateInfo=" + dateInfo,
+      url: "../detail/detail?CheckInOutDate=" + CheckInOutDate,
     });
   },
 
   couponInformation: function () {    
   },
+
+  dateSelect: function () {
+    //url='../dateSelect/dateSelect'
+    var CheckInOutDate = JSON.stringify({
+      checkInDate: this.g_checkInDate,
+      checkOutDate: this.g_checkOutDate
+    })
+    //console.info(CheckInOutDate)
+    wx.navigateTo({
+      url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
+    });
+  },
+  
+  updateCheckInOutDate: function () {
+    //console.log(this.g_checkInDate, this.g_checkOutDate); 
+    this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
+    this.checkOutDate = DateUtils.formatFuc(this.g_checkOutDate, 'MM-dd');
+    this.weekDay = DateUtils.formatFuc(this.g_checkInDate, 'E');
+    //console.log(this.checkInDate, this.checkOutDate, this.weekDay);
+    this.setData({
+      checkInDate: this.checkInDate,
+      ///checkOutDate: res.data.checkOutDate,
+      weekDay: this.weekDay
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    
+    this.g_checkInDate = new Date();
+    this.g_checkOutDate = DateUtils.addFuc(new Date(), 1, 'day');
+    this.updateCheckInOutDate(); 
   },
 
   /**
@@ -100,14 +109,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var self=this;
+    var that = this;
     wx.getStorage({
       key: 'ROOM_SOURCE_DATE',
       success: function(res) {
-        self.setData({
-          checkInDate: res.data.checkInDate,
-          checkOutDate: res.data.checkOutDate,
-          day: Moment(new Date(res.data.checkInDate)).format('E')
+        that.g_checkInDate = DateUtils.formatFuc(res.data.checkInDate,'yyyy-MM-dd');
+        that.g_checkOutDate = DateUtils.formatFuc(res.data.checkOutDate,'yyyy-MM-dd');
+        that.updateCheckInOutDate();
+        console.log(that.g_checkInDate, that.g_checkOutDate); 
+        wx.clearStorage({
+          success: function (res) {
+            console.log("onShow","wx.clearStorage");
+          }
         })
       },
     })

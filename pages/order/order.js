@@ -32,14 +32,15 @@ Page({
    */
   onLoad: function (options) {
     this.bookingInformation = JSON.parse(options.bookingInformation);
-    ///console.log(this.bookingInformation);
+    
     var roomRegisterDateInfo = this.bookingInformation.roomBookingDateInfo;
-    var differ = daysDiffer(roomRegisterDateInfo.inDate, roomRegisterDateInfo.outDate);
-    this.setData({
-      checkinDate: roomRegisterDateInfo.inDate,
-      checkoutDate: roomRegisterDateInfo.outDate,
-      stayNightNumber: differ
-    });
+    console.log(roomRegisterDateInfo);
+     ///var differ = daysDiffer(roomRegisterDateInfo.inDate, roomRegisterDateInfo.outDate);
+    // this.setData({
+    //   checkinDate: roomRegisterDateInfo.inDate,
+    //   checkoutDate: roomRegisterDateInfo.outDate,
+    //   stayNightNumber: differ
+    // });
     
   },
 

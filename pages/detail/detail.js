@@ -1,20 +1,7 @@
 // pages/detail/detail.js
 var Moment = require("../../utils/Moment.js");
 
-var daysDiffer = function (indate,outdate) {
-  if (typeof indate === 'string' && typeof outdate === 'string' ){
-    indate = new Date(indate);
-    outdate = new Date(outdate);
-  }else{
-    var curDate = new Date();
-    indate = curDate;
-    outdate = new Date(curDate.getTime() + 24 * 60 * 60 * 1000);//后一天
-  }
-  var time1 = indate.getTime();
-  var time2 = outdate.getTime();
-  var differ = Math.ceil((time2 - time1) / (1000 * 3600 * 24));//除不尽时,向上取整
-  return differ;
-}
+var DateUtils = require("../../utils/DateUtils.js");
 
 Page({
   roomInformation:[],
@@ -52,13 +39,12 @@ Page({
   bookingRoom: function (e) {
     if (e.target.dataset.hasOwnProperty("typeindex")){
       var roomTypeIndex = e.target.dataset.typeindex;
-      ///console.log(roomTypeIndex);
       var bookingInformation = this.roomInformation[roomTypeIndex];
       bookingInformation.roomBookingDateInfo = this.roomRegisterDateInfo;
       wx.navigateTo({
         url: '../order/order?bookingInformation=' + JSON.stringify(bookingInformation),
   });
-      //console.log(bookingInformation);
+      //console.log(bookigInformation);
     }
     //console.log("bookingRoom");
   },
@@ -67,8 +53,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    this.roomRegisterDateInfo = JSON.parse(options.dateInfo);
-    var differ = daysDiffer(this.roomRegisterDateInfo.inDate,                this.roomRegisterDateInfo.outDate);
+    this.roomRegisterDateInfo = JSON.parse(options.CheckInOutDate);
+    var differ = DateUtils.daysDiffer(this.roomRegisterDateInfo.inDate,                this.roomRegisterDateInfo.outDate);
     that.setData({
       checkInDate: Moment(new Date(this.roomRegisterDateInfo.inDate)).format('MM-dd'),
       checkInDays: differ,
@@ -85,7 +71,7 @@ Page({
       data: { session: getApp().globalData.session_key },
       method: 'GET',
       success: function (result) {
-        console.log(result);
+        //console.log(result);
         that.roomInformation = [];
         var rooms = result.data.data.rooms;
         var house_type = result.data.data.house_type;
@@ -94,7 +80,7 @@ Page({
           if (charge_type == that.currentTabIndex) {
             that.roomInformation.push(rooms[index]);
           } else {
-            console.log(charge_type, that.currentTabIndex);
+            ///console.log(charge_type, that.currentTabIndex);
           }
         }
         //console.log(that.roomInformation);
@@ -107,7 +93,7 @@ Page({
         that.setData({
           roomInformation: that.roomInformation
         });
-        console.log(that.roomInformation);
+        ///console.log(that.roomInformation);
       }
     });
   },
