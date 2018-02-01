@@ -8,7 +8,7 @@ Page({
    */
   data: {
     currentTab:0,
-    allOrders:[]
+    allOrders:null
   },
   swichNav: function (e) {
     var that = this;
@@ -26,7 +26,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options)
     if (options){
       this.setData({
         currentTab: options.tab
@@ -40,14 +39,14 @@ Page({
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
       console.log(res)
-      if(res.data.code == 0){
+      if(res.errcode == 0){
         that.setData({
           allOrders: res.data.orders
         })
-        console.info(that.data.allOrders)
+        
       }else{
         wx.showToast({
-          title: res.data.errmsg,
+          title: res.errmsg,
           icon:'none',
           duration:2000
         })

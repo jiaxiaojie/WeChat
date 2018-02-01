@@ -40,7 +40,7 @@ App({
                 method: 'GET',
                 success: function (loginResult) {
                   var data = loginResult.data.data;
-                  console.info(data.session)
+                  // console.info(data.session)
                   that.globalData.session_key = data.session;
                   that.globalData.m_remain_time = data.remain_time;
                 }

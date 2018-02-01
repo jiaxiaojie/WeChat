@@ -12,17 +12,22 @@
   <view class='item itemed' wx:for="{{allOrders}}" wx:key="id">
     <view class='up'>
       <view class='one'>
-        <text class='title'>{{item.house_name}}</text>
-        <view class='chotel'>已入住</view>
+        <text class='title'>{{item.id}}</text>
+        <view class='chotel' wx:if="item.order_state == 0">待处理</view>
+        <view class='chotel' wx:elif="item.order_state == 1">已接单</view>
+        <view class='chotel' wx:elif="item.order_state == 2">已拒单</view>
+        <view class='chotel' wx:elif="item.order_state == 3">已取消</view>
+        <view class='chotel' wx:elif="item.order_state == 4">已入住</view>
+        <view class='chotel' wx:else="item.order_state == 5">已离店</view>
       </view>
       <view class='two'> 
         <view>
           <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
+          <text>{{item.come_at}}</text>
         </view>
         <view>
           <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
+          <text>{{item.leave_at}}</text>
         </view>
       </view>
     </view>
@@ -36,203 +41,6 @@
     </view>
   </view>
 
-  <view class='item itemed'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已入住</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          181元
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <!--已取消  -->
-  <view class='item itemcancel'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已取消</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='time'>
-          0小时0分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <view class='item itemcancel'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已取消</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          187元
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <!--未入住  -->
-  <view class='item unitem'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>未入住</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='time'>
-          0小时0分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <view class='item unitem'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>未入住</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          188元
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <!-- 待支付 -->
-  <view class='item ditem'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>待支付</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='time'>
-          6小时30分钟
-        </view>
-        <view class='cancel' style='margin-left:145rpx;'>
-          取消支付
-        </view>
-        <view class='again'>
-          立即支付
-        </view>
-    </view>
-  </view>
-
-  <view class='item ditem'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>待支付</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          188元
-        </view>
-        <view class='cancel'>
-          取消支付
-        </view>
-        <view class='again'>
-          立即支付
-        </view>
-    </view>
-  </view>
 </view>
 
 <!--待支付  -->
