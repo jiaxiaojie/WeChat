@@ -33,10 +33,10 @@
     </view>
     <view class='down'>
         <view class='time'>
-          6小时40分钟
+          6小时40分钟{{livedTime}}
         </view>
         <view class='again'>
-          再次预定
+          <navigator url="../detail/detail" hover-class="navigator-hover">再次预定</navigator>
         </view>
     </view>
   </view>

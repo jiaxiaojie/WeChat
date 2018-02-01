@@ -1,5 +1,5 @@
 // pages/allorders/allorders.js
-var Moment = require("../../utils/Moment.js");
+var DateUtils = require("../../utils/DateUtils.js");
 var request = require("../../utils/Request.js");
 Page({
 
@@ -8,7 +8,8 @@ Page({
    */
   data: {
     currentTab:0,
-    allOrders:null
+    allOrders:null,
+    livedTime:0
   },
   swichNav: function (e) {
     var that = this;
