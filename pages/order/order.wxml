@@ -48,7 +48,7 @@
 
 <view class='note'>
   <text class="iconfont icon-gantanhao" style='margin-top:-5rpx;'></text>
-  <view class='info'>分时住宿客户需额外支付30元宝洁费用请于入住日下午14:00后办理入住，如提前到店，视酒店空房情况安排。</view>
+  <view class='info'>分时住宿客户每次需额外支付清洁费用，请于入住日下午14：00后办理入住，如提前到店，视酒店空房情况安排。</view>
 </view> 
 
 
@@ -57,7 +57,7 @@
   <view class='left'>
     <text class='price'>¥ {{totalFee}}</text>
     <text class='intro'>剩余金额将返还至个人账号</text>
-    <text class='detail'>明细</text>
+    <!-- <text class='detail'>明细</text> -->
     <image class='imgs' src='../../image/upangel.png'></image>
   </view>
   <button class="right" formType="submit">提交订单</button>  
