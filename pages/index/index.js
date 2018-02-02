@@ -9,19 +9,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-      //默认日期&时间
-    checkInDate:"",
-    checkOutDate:"",
+    //默认日期&时间
+    checkInDate: "",
+    checkOutDate: "",
     weekDay: ""
   },
 
-//获得分时信息
+  //获得分时信息
   checkInTime: function () {
     var requestUrl = "/order/current";
     var jsonData = {
       session: getApp().globalData.session_key
     };
-    console.log(getApp().globalData.session_key )
+    console.log(getApp().globalData.session_key)
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
       ///console.log(res)
       if (res.errcode == 0) {
@@ -36,25 +36,25 @@ Page({
       }
     })
   },
- //查看卡券信息
-  viewCoupons:function(){
+  //查看卡券信息
+  viewCoupons: function () {
     wx.navigateTo({
       url: '../breakfast/breakfast',
     })
   },
 
-//查看会员信息
-  viewMember:function(){
+  //查看会员信息
+  viewMember: function () {
     wx.navigateTo({
       url: '../person/person',
     })
   },
 
-  //入住时间选择
-  checkInDetail:function(){  
+  //Booking Room
+  bookRoom: function () {
     var CheckInOutDate = JSON.stringify({
-      inDate: this.g_checkInDate,
-      outDate: this.g_checkOutDate
+      checkInDate: this.g_checkInDate,
+      checkOutDate: this.g_checkOutDate
     })
     //console.info(CheckInOutDate)
     wx.navigateTo({
@@ -62,9 +62,9 @@ Page({
     });
   },
 
-  couponInformation: function () {    
+  couponInformation: function () {
   },
-
+  //CheckIn & Checkout date select
   dateSelect: function () {
     //url='../dateSelect/dateSelect'
     var CheckInOutDate = JSON.stringify({
@@ -76,7 +76,7 @@ Page({
       url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
     });
   },
-  
+
   updateCheckInOutDate: function () {
     //console.log(this.g_checkInDate, this.g_checkOutDate); 
     this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
@@ -95,14 +95,14 @@ Page({
   onLoad: function () {
     this.g_checkInDate = new Date();
     this.g_checkOutDate = DateUtils.addFuc(new Date(), 1, 'day');
-    this.updateCheckInOutDate(); 
+    this.updateCheckInOutDate();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -112,14 +112,14 @@ Page({
     var that = this;
     wx.getStorage({
       key: 'ROOM_SOURCE_DATE',
-      success: function(res) {
-        that.g_checkInDate = DateUtils.formatFuc(res.data.checkInDate,'yyyy-MM-dd');
-        that.g_checkOutDate = DateUtils.formatFuc(res.data.checkOutDate,'yyyy-MM-dd');
+      success: function (res) {
+        that.g_checkInDate = DateUtils.formatFuc(res.data.checkInDate, 'yyyy-MM-dd');
+        that.g_checkOutDate = DateUtils.formatFuc(res.data.checkOutDate, 'yyyy-MM-dd');
         that.updateCheckInOutDate();
-        console.log(that.g_checkInDate, that.g_checkOutDate); 
+        console.log(that.g_checkInDate, that.g_checkOutDate);
         wx.clearStorage({
           success: function (res) {
-            console.log("onShow","wx.clearStorage");
+            console.log("onShow", "wx.clearStorage");
           }
         })
       },
@@ -130,34 +130,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })

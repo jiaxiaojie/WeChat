@@ -31,5 +31,5 @@
     <view class='method' style='text-align:center;'>入住</view>
      <view class='date'>{{checkInDate}} {{weekDay}}</view> 
   </view>
-  <view class='advance' bindtap='checkInDetail'>预定</view>
+  <view class='advance' bindtap='bookRoom'>预定</view>
 </view>
