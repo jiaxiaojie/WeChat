@@ -15,6 +15,8 @@ Page({
     roomType: "",
     avalibleRoomNumber: 1,
     totalFee: 0,
+    name: '',
+    tel: '',  
   },
   /**
    * 生命周期函数--监听页面加载
@@ -47,47 +49,6 @@ Page({
       totalFee: this.totalFee
     });
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
 
   /**
    * 用户点击右上角分享
@@ -95,23 +56,51 @@ Page({
   onShareAppMessage: function () {
 
   },
-  submitOrder: function () {
-    if (this.userName === "") {
+  submitOrder: function (e) {
+    var warn = "";//弹框时提示的内容  
+    var flag = true;//判断信息输入是否完整 
+    //判断的顺序依次是：姓名-手机号-地址-具体地址-预约日期-预约时间-开荒面积 
+    console.info(e) 
+    if (e.detail.value.name == "") {
+      warn = "请填写您的姓名！";
+    } else if (e.detail.value.tel == "") {
+      warn = "请填写您的手机号！";
+    } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(e.detail.value.tel))) {
+      warn = "手机号格式不正确";
+    }else{
+      flag = false;//若必要信息都填写，则不用弹框，且页面可以进行跳转  
+      var that = this;
+      //？后面跟的是需要传递到下一个页面的参数  
+      // wx.navigateTo({
+      //   url: '../confirmForest/confirmForest?area=' + e.detail.value.area + '&tel=' + e.detail.value.tel'
+      // })
+      console.log('form发生了submit事件，携带数据为：', e.detail.value);  
+    }
+    //如果信息填写不完整，弹出输入框  
+    if (flag == true) {
       wx.showToast({
-        title: '请输入您的姓名',
-        icon: 'success',
+        title: warn,
+        icon: 'none',
         duration: 1500
       })
-      return;
     }
-    if (this.phoneNumber === "") {
-      wx.showToast({
-        title: '请输入您的手机号码',
-        icon: 'success',
-        duration: 1500
-      })
-      return;
-    }
+
+    // if (this.userName === "") {
+    //   wx.showToast({
+    //     title: '请输入您的姓名',
+    //     icon: 'none',
+    //     duration: 1500
+    //   })
+    //   return;
+    // }
+    // if (this.phoneNumber === "") {
+    //   wx.showToast({
+    //     title: '请输入您的手机号码',
+    //     icon: 'none',
+    //     duration: 1500
+    //   })
+    //   return;
+    // }
 
     console.log(DateUtils.formatFuc(this.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd hh:mm:ss'));
     console.log(DateUtils.formatFuc(this.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd hh:mm:ss'));
@@ -159,5 +148,5 @@ Page({
         avalibleRoomNumber: this.avalibleRoomNumber
       });
     }
-  },
+  }
 })

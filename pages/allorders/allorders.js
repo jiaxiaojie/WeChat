@@ -14,12 +14,13 @@ Page({
   swichNav: function (e) {
     var that = this;
     var current = e.target.dataset.current;
-    if (this.data.currentTab === e.target.dataset.current) {
+    if (this.data.currentTab === current) {
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current
-      })
+        currentTab: current
+      });
+      that.data.allOrders = 1;
     }
   },
   //取消支付
@@ -33,11 +34,21 @@ Page({
       session: getApp().globalData.session_key
     };
     request.httpsPostRequest(requestUrl, jsonData, function (res) {
-      wx.showToast({
-        title: '取消成功',
-        icon: 'none',
-        duration: 2000
-      })
+      console.log(res.errcode)
+      if(res.errcode == 0){
+        wx.showToast({
+          title: '取消成功',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+      else{
+        wx.showToast({
+          title: res.errmsg,
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
   },
   /**

@@ -35,6 +35,9 @@
         <view class='time'>
           {{item.differH}}小时{{item.differM}}分钟
         </view>
+        <!-- <view class='price' wx:if={{item.pay_type == 1}}>
+            188元
+        </view> -->
         <view class='cancel' style='margin-left:145rpx;' wx:if='{{item.order_state == 4}}' data-id="{{item.id}}" bindtap='cancelPay'>
           取消支付
         </view>
@@ -43,157 +46,146 @@
         </view>
     </view>
   </view>
-
-<view class='item'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel ditem'>待支付</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='time'>
-          6小时30分钟
-        </view>
-        <view class='cancel' style='margin-left:145rpx;'>
-          取消支付
-        </view>
-        <view class='again'>
-          立即支付
-        </view>
-    </view>
-  </view>
 </view>
 
 <!--待支付  -->
 <view style="display:{{currentTab==1? '' : 'none'}}">
-  <view class='item'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel ditem'>待支付</view>
+  <view wx:for="{{allOrders}}" wx:key="id">
+    <view class='item' wx:if="{{item.order_state == 4}}">
+      <view class='up'>
+        <view class='one'>
+          <text class='title'>缀美主题酒店</text>
+          <view class='chotel ditem'>待支付</view>
+        </view>
+        <view class='two'> 
+          <view>
+            <text style='color:#999;margin-right:10rpx;'>入住:</text>
+            <text>12月7日</text>
+          </view>
+          <view>
+            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+            <text>12月8日</text>
+          </view>
+        </view>
       </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
+      <view class='down'>
+          <view class='price'>
+            188元
+          </view>
+          <view class='cancel'>
+            取消支付
+          </view>
+          <view class='again'>
+            立即支付
+          </view>
       </view>
     </view>
-    <view class='down'>
-        <view class='price'>
-          188元
-        </view>
-        <view class='cancel'>
-          取消支付
-        </view>
-        <view class='again'>
-          立即支付
-        </view>
+    <view wx:else>
+      <view class='emptyInfo'>暂无信息</view>
     </view>
   </view>
-
 </view>
 
 <!--未入住  -->
 <view style="display:{{currentTab==2? '' : 'none'}}">
-  <view class='item'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel unitem'>未入住</view>
+  <view wx:for="{{allOrders}}" wx:key="id">
+    <view class='item' wx:if="{{item.order_state == 2}}">
+      <view class='up'>
+        <view class='one'>
+          <text class='title'>缀美主题酒店</text>
+          <view class='chotel unitem'>未入住</view>
+        </view>
+        <view class='two'> 
+          <view>
+            <text style='color:#999;margin-right:10rpx;'>入住:</text>
+            <text>12月7日</text>
+          </view>
+          <view>
+            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+            <text>12月8日</text>
+          </view>
+        </view>
       </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
+      <view class='down'>
+          <view class='time'>
+            0小时0分钟
+          </view>
+          <view class='again'>
+            再次预定
+          </view>
       </view>
     </view>
-    <view class='down'>
-        <view class='time'>
-          0小时0分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
+    <view wx:else>
+      <view class='emptyInfo'>暂无信息</view>
     </view>
   </view>
 </view>
 <!--已入住  -->
 <view style="display:{{currentTab==3? '' : 'none'}}">
-  <view class='item'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel itemed'>已入住</view>
+  
+  <view wx:for="{{allOrders}}" wx:key="id">
+    <view class='item' wx:if="{{item.order_state == 0}}">
+      <view class='up'>
+        <view class='one'>
+          <text class='title'>缀美主题酒店</text>
+          <view class='chotel itemed'>已入住</view>
+        </view>
+        <view class='two'> 
+          <view>
+            <text style='color:#999;margin-right:10rpx;'>入住:</text>
+            <text>12月7日</text>
+          </view>
+          <view>
+            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+            <text>12月8日</text>
+          </view>
+        </view>
       </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
+      <view class='down'>
+          <view class='time'>
+            6小时40分钟
+          </view>
+          <view class='again'>
+            再次预定
+          </view>
       </view>
     </view>
-    <view class='down'>
-        <view class='time'>
-          6小时40分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
+    <view wx:else>
+      <view class='emptyInfo'>暂无信息</view>
     </view>
   </view>
-
 </view>
 <!--已取消  -->
 <view style="display:{{currentTab==4? '' : 'none'}}">
-  <view class='item'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel itemcancel'>已取消</view>
+  <view wx:for="{{allOrders}}" wx:key="id">
+    <view class='item' wx:if="{{item.order_state == 0}}">
+      <view class='up'>
+        <view class='one'>
+          <text class='title'>缀美主题酒店</text>
+          <view class='chotel itemcancel'>已取消</view>
+        </view>
+        <view class='two'> 
+          <view>
+            <text style='color:#999;margin-right:10rpx;'>入住:</text>
+            <text>12月7日</text>
+          </view>
+          <view>
+            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+            <text>12月8日</text>
+          </view>
+        </view>
       </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
+      <view class='down'>
+          <view class='time'>
+            0小时0分钟
+          </view>
+          <view class='again'>
+            再次预定
+          </view>
       </view>
     </view>
-    <view class='down'>
-        <view class='time'>
-          0小时0分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
+    <view wx:else>
+      <view class='emptyInfo'>暂无信息</view>
     </view>
-  </view>
+  </view> 
 </view>

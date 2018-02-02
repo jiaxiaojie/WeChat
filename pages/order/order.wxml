@@ -1,3 +1,5 @@
+<form bindsubmit="submitOrder" report-submit="true"> 
+
 <view class='header'>
   <view class='title'>苏州缀美主题酒店</view>
   <view class='info'>
@@ -18,19 +20,21 @@
     <text>{{roomType}}</text>
     <view class="btn-numbox">
       <view class="count">
-        <text id="num-jian" class="num-jian" bindtap="bindMinus">-</text>
+        <!-- <text id="num-jian" class="num-jian" bindtap="bindMinus">-</text> -->
+        <text id="num-jian" class="num-jian">-</text>
         <input type="number" class="input-num" bindchange="bindManual" id="input-num" value="{{avalibleRoomNumber}}" />
-        <text id="num-jia" class="num-jia" bindtap="bindPlus">+</text>
+        <text id="num-jia" class="num-jia">+</text>
+        <!-- <text id="num-jia" class="num-jia" bindtap="bindPlus">+</text> -->
       </view>
       </view>
   </view>
   <view class='item'>
     <text>姓名</text>
-    <input class='cnt' type='text' bindchange="bindUserName" placeholder='请输入您的真实姓名'></input>
+    <input class='cnt' type='text' name="name" bindchange="bindUserName" placeholder='请输入您的真实姓名'></input>
   </view>
   <view class='item'>
     <text>手机号</text>
-    <input class='cnt' type='text' bindchange="bindPhoneNumber" placeholder='请输入您的手机号'></input>
+    <input class='cnt' type='number' name="tel" bindchange="bindPhoneNumber" placeholder='请输入您的手机号'></input>
   </view>
   <view class='item'>
     <text>优惠券</text>
@@ -56,5 +60,7 @@
     <text class='detail'>明细</text>
     <image class='imgs' src='../../image/upangel.png'></image>
   </view>
-  <view class='right' bindtap="submitOrder" >提交订单</view>
+  <button class="right" formType="submit">提交订单</button>  
+  <!-- <view class='right' bindtap="submitOrder" >提交订单</view> -->
 </view>
+</form>
