@@ -46,7 +46,7 @@
   color:#333;
   font-size: 30rpx;
 }
-.itemed .chotel{
+.itemed.chotel{
   width:110rpx;
   height: 44rpx;
   background-color: #FFFAF4 ;
@@ -78,7 +78,7 @@
   text-align: center;
   line-height: 60rpx;
 }
-.itemcancel .chotel{
+.itemcancel.chotel{
   width:110rpx;
   height: 44rpx;
   background-color: #E6E6E6 ;
@@ -87,7 +87,7 @@
   line-height: 44rpx;
   text-align: center;
 }
-.unitem .chotel{
+.unitem.chotel{
   width:110rpx;
   height: 44rpx;
   background-color: #E6E6E6 ;
@@ -96,7 +96,7 @@
   line-height: 44rpx;
   text-align: center;
 }
-.ditem .chotel{
+.ditem.chotel{
   width:110rpx;
   height: 44rpx;
   background-color: #E2231A  ;

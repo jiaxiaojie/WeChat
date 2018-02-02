@@ -27,7 +27,7 @@
   </view>
 </view>
 
-<view class='item' style='margin-top:20rpx;'>
+<view class='item' style='margin-top:20rpx;' bindtap='dateSelect'>
   <view style='color:#666; font-size:28rpx;'>入住时间
     <text style='color:#BA8E52;margin-left:20rpx;'>{{checkInDate}}</text>
   </view>

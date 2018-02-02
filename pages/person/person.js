@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    remainTime: '',
+    remain_max_minutes: '',
+    remain_min_minutes:'',
     userAvatarUrl: '',
     userName:''
   },
@@ -36,7 +37,8 @@ Page({
     that.getUserAvatar();
     console.log(app.globalData)
     that.setData({
-      remainTime: app.globalData.m_remain_time
+      remain_min_minutes: app.globalData.g_remain_min_minutes,
+      remain_max_minutes: app.globalData.g_remain_max_minutes
     })
   },
 

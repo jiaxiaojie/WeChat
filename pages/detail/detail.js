@@ -6,6 +6,8 @@ Page({
   checkInOutDate: null,
   currentTabIndex: 0,
   currentDetailIndex: 0,
+  g_checkInDate: null,
+  g_checkOutDate: null,
 
   data: {
     checkInDate: 0,
@@ -13,8 +15,36 @@ Page({
     roomInformation: null,
     isFold: true,
     currentDetailIndex: 0,
+    // checkInDate: "",
+    // checkOutDate: "",
+    // weekDay: ""
   },
 
+//选择入住日期
+  //CheckIn & Checkout date select
+  dateSelect: function () {
+    //url='../dateSelect/dateSelect'
+    var CheckInOutDate = JSON.stringify({
+      _checkInDate: this.g_checkInDate,
+      _checkOutDate: this.g_checkOutDate
+    })
+    //console.info(CheckInOutDate)
+    wx.navigateTo({
+      url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
+    });
+  },
+  updateCheckInOutDate: function () {
+    //console.log(this.g_checkInDate, this.g_checkOutDate); 
+    this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
+    this.checkOutDate = DateUtils.formatFuc(this.g_checkOutDate, 'MM-dd');
+    this.weekDay = DateUtils.formatFuc(this.g_checkInDate, 'E');
+    //console.log(this.checkInDate, this.checkOutDate, this.weekDay);
+    this.setData({
+      checkInDate: this.checkInDate,
+      ///checkOutDate: res.data.checkOutDate,
+      weekDay: this.weekDay
+    })
+  },
   tabFun: function (e) {
     //获取触发事件组件的dataset属性  
     this.currentTabIndex = e.target.dataset.id;
@@ -48,6 +78,11 @@ Page({
 
   onLoad: function (options) {
     var that = this;
+// --
+    that.g_checkInDate = new Date();
+    that.g_checkOutDate = DateUtils.addFuc(new Date(), 1, 'day');
+    that.updateCheckInOutDate();
+// --
     this.checkInOutDate = JSON.parse(options.CheckInOutDate);
     var differ = DateUtils.daysDiffer(this.checkInOutDate.checkInDate, this.checkInOutDate.checkOutDate);
     that.setData({

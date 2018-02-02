@@ -1,6 +1,7 @@
 // pages/allorders/allorders.js
-var DateUtils = require("../../utils/DateUtils.js");
+var moment = require("../../utils/moment.min.js");
 var request = require("../../utils/Request.js");
+
 Page({
 
   /**
@@ -8,8 +9,7 @@ Page({
    */
   data: {
     currentTab:0,
-    allOrders:null,
-    livedTime:0
+    allOrders:[]
   },
   swichNav: function (e) {
     var that = this;
@@ -21,6 +21,24 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
+  },
+  //取消支付
+  cancelPay:function(e){
+    var requestUrl = "/order/cancel";
+    if (e.target.dataset.hasOwnProperty("id")){
+      var orderId = e.target.dataset.id;
+    }
+    var jsonData = {
+      id: orderId,
+      session: getApp().globalData.session_key
+    };
+    request.httpsPostRequest(requestUrl, jsonData, function (res) {
+      wx.showToast({
+        title: '取消成功',
+        icon: 'none',
+        duration: 2000
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -40,16 +58,31 @@ Page({
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
       console.log(res)
-      if(res.errcode == 0){
-        that.setData({
-          allOrders: res.data.orders
+      if (res.errcode == 0) {
+        var oldOrderList = res.data.orders;
+        var newOrderList = [];
+        var newOrderList = oldOrderList.map(function (value) {
+          console.log(value)
+          var date1 = moment(new Date(value.come_at)); //开始时间
+          var date2 = moment(new Date(value.created_at));//结束时间
+          var differHours = date2.diff(date1, 'hours');
+          var differMinutes = (date2.diff(date1, 'minutes')) % 60;
+          value.come_at = moment(value.come_at).format('YYYY-MM-DD'); 
+          value.differH = differHours;
+          value.differM = differMinutes;
+          console.log(value)
+          return value;
         })
-        
-      }else{
+        console.log(newOrderList);
+        that.setData({
+          allOrders: newOrderList
+        })
+      }
+      else {
         wx.showToast({
           title: res.errmsg,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
       

@@ -9,16 +9,16 @@
 <!--全部  -->
 <view style="display:{{currentTab==0 ? '' : 'none'}}">
   <!--已入住  -->
-  <view class='item itemed' wx:for="{{allOrders}}" wx:key="id">
+  <view class='item' wx:for="{{allOrders}}" wx:key="id">
     <view class='up'>
       <view class='one'>
         <text class='title'>{{item.id}}</text>
-        <view class='chotel' wx:if="item.order_state == 0">待处理</view>
-        <view class='chotel' wx:elif="item.order_state == 1">已接单</view>
-        <view class='chotel' wx:elif="item.order_state == 2">已拒单</view>
-        <view class='chotel' wx:elif="item.order_state == 3">已取消</view>
-        <view class='chotel' wx:elif="item.order_state == 4">已入住</view>
-        <view class='chotel' wx:else="item.order_state == 5">已离店</view>
+        <view class='chotel ditem' wx:if="item.order_state == 0">待处理</view>
+        <view class='chotel itemed' wx:elif="item.order_state == 1">已接单</view>
+        <view class='chotel unitem' wx:elif="item.order_state == 2">已拒单</view>
+        <view class='chotel itemcancel' wx:elif="item.order_state == 3">已取消</view>
+        <view class='chotel itemed' wx:elif="item.order_state == 4">已入住</view>
+        <view class='chotel itemed' wx:else="item.order_state == 5">已离店</view>
       </view>
       <view class='two'> 
         <view>
@@ -33,7 +33,10 @@
     </view>
     <view class='down'>
         <view class='time'>
-          6小时40分钟{{livedTime}}
+          {{item.differH}}小时{{item.differM}}分钟
+        </view>
+        <view class='cancel' style='margin-left:145rpx;' wx:if='{{item.order_state == 4}}' data-id="{{item.id}}" bindtap='cancelPay'>
+          取消支付
         </view>
         <view class='again'>
           <navigator url="../detail/detail" hover-class="navigator-hover">再次预定</navigator>
@@ -41,16 +44,11 @@
     </view>
   </view>
 
-</view>
-
-<!--待支付  -->
-<view style="display:{{currentTab==1? '' : 'none'}}">
-
-  <view class='item ditem'>
+<view class='item'>
     <view class='up'>
       <view class='one'>
         <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>待支付</view>
+        <view class='chotel ditem'>待支付</view>
       </view>
       <view class='two'> 
         <view>
@@ -75,12 +73,15 @@
         </view>
     </view>
   </view>
+</view>
 
-  <view class='item ditem'>
+<!--待支付  -->
+<view style="display:{{currentTab==1? '' : 'none'}}">
+  <view class='item'>
     <view class='up'>
       <view class='one'>
         <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>待支付</view>
+        <view class='chotel ditem'>待支付</view>
       </view>
       <view class='two'> 
         <view>
@@ -110,11 +111,11 @@
 
 <!--未入住  -->
 <view style="display:{{currentTab==2? '' : 'none'}}">
-  <view class='item unitem'>
+  <view class='item'>
     <view class='up'>
       <view class='one'>
         <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>未入住</view>
+        <view class='chotel unitem'>未入住</view>
       </view>
       <view class='two'> 
         <view>
@@ -136,41 +137,14 @@
         </view>
     </view>
   </view>
-
-  <view class='item unitem'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>未入住</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          188元
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
 </view>
 <!--已入住  -->
 <view style="display:{{currentTab==3? '' : 'none'}}">
-  <view class='item itemed'>
+  <view class='item'>
     <view class='up'>
       <view class='one'>
         <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已入住</view>
+        <view class='chotel itemed'>已入住</view>
       </view>
       <view class='two'> 
         <view>
@@ -193,40 +167,14 @@
     </view>
   </view>
 
-  <view class='item itemed'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已入住</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          181元
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
 </view>
 <!--已取消  -->
 <view style="display:{{currentTab==4? '' : 'none'}}">
-  <view class='item itemcancel'>
+  <view class='item'>
     <view class='up'>
       <view class='one'>
         <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已取消</view>
+        <view class='chotel itemcancel'>已取消</view>
       </view>
       <view class='two'> 
         <view>
@@ -242,33 +190,6 @@
     <view class='down'>
         <view class='time'>
           0小时0分钟
-        </view>
-        <view class='again'>
-          再次预定
-        </view>
-    </view>
-  </view>
-
-  <view class='item itemcancel'>
-    <view class='up'>
-      <view class='one'>
-        <text class='title'>缀美主题酒店</text>
-        <view class='chotel'>已取消</view>
-      </view>
-      <view class='two'> 
-        <view>
-          <text style='color:#999;margin-right:10rpx;'>入住:</text>
-          <text>12月7日</text>
-        </view>
-        <view>
-          <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-          <text>12月8日</text>
-        </view>
-      </view>
-    </view>
-    <view class='down'>
-        <view class='price'>
-          187元
         </view>
         <view class='again'>
           再次预定
