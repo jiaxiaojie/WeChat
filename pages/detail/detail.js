@@ -33,15 +33,17 @@ Page({
       url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
     });
   },
+  
   updateCheckInOutDate: function () {
     //console.log(this.g_checkInDate, this.g_checkOutDate); 
     this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
     this.checkOutDate = DateUtils.formatFuc(this.g_checkOutDate, 'MM-dd');
     this.weekDay = DateUtils.formatFuc(this.g_checkInDate, 'E');
     //console.log(this.checkInDate, this.checkOutDate, this.weekDay);
+    var differ = DateUtils.daysDiffer(this.g_checkInDate, this.g_checkOutDate);
     this.setData({
       checkInDate: this.checkInDate,
-      ///checkOutDate: res.data.checkOutDate,
+      checkInDays: differ,
       weekDay: this.weekDay
     })
   },
@@ -67,7 +69,12 @@ Page({
     if (e.target.dataset.hasOwnProperty("typeindex")) {
       var roomTypeIndex = e.target.dataset.typeindex;
       var bookingInformation = this.roomInformation[roomTypeIndex];
-      bookingInformation.checkInOutDate = this.checkInOutDate;
+      ///this.checkInOutDate。_checkInDate: this.g_checkInDate
+      var bookingInOutDate = {
+        checkInDate: this.g_checkInDate,
+        checkOutDate: this.g_checkOutDate
+      }
+      bookingInformation.checkInOutDate = bookingInOutDate;
       wx.navigateTo({
         url: '../order/order?bookingInformation=' + JSON.stringify(bookingInformation),
       });
@@ -78,13 +85,13 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-// --
-    that.g_checkInDate = new Date();
-    that.g_checkOutDate = DateUtils.addFuc(new Date(), 1, 'day');
-    that.updateCheckInOutDate();
-// --
     this.checkInOutDate = JSON.parse(options.CheckInOutDate);
-    var differ = DateUtils.daysDiffer(this.checkInOutDate.checkInDate, this.checkInOutDate.checkOutDate);
+
+    that.g_checkInDate = this.checkInOutDate.checkInDate;
+    that.g_checkOutDate = this.checkInOutDate.checkOutDate;
+
+    var differ = DateUtils.daysDiffer(this.g_checkInDate, this.g_checkOutDate);
+
     that.setData({
       checkInDate: DateUtils.formatFuc(this.checkInOutDate.checkInDate, 'MM-dd'),
       checkInDays: differ,
@@ -137,7 +144,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    wx.getStorage({
+      key: 'ROOM_SOURCE_DATE',
+      success: function (res) {
+        that.g_checkInDate = DateUtils.formatFuc(res.data.checkInDate, 'yyyy-MM-dd');
+        that.g_checkOutDate = DateUtils.formatFuc(res.data.checkOutDate, 'yyyy-MM-dd');
+        that.updateCheckInOutDate();
+        console.log(that.g_checkInDate, that.g_checkOutDate);
+        wx.clearStorage({
+          success: function (res) {
+            console.log("onShow", "wx.clearStorage");
+          }
+        })
+      },
+    })
   },
 
   /**

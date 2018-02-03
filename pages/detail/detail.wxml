@@ -49,7 +49,7 @@
         <text style='font-size:28rpx;color:#333;'>{{item.house_name}}</text>
         <image src='../../image/angel.png' style='width:10rpx;height:10rpx;'></image>
       </view>
-      <view style='font-size:24rpx;color:#666;pointer-events: none'>¥ {{currentTabIndex =='0' ? item.timekeeping_price :item.house_price }}元
+      <view style='font-size:24rpx;color:#666;pointer-events: none'>¥ {{currentTabIndex =='0' ? item.timekeeping_price :item.house_price }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text>
         <text style='font-size:22rpx; color:#999;margin-right:20rpx;'>（门市价）</text>
         <image style='width: 22rpx;height: 12rpx;' src='../../image/upangel.png'></image>
       </view>
@@ -61,7 +61,7 @@
         <view style='font-size:22rpx; color:#999;'>仅剩{{item.residue_house_quantity}}间</view>
       </view>
       <view class='intro'>{{item.roomType}}/无窗/{{item.breakfast}}早{{item.info}}</view>
-      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price :item.member_house_price }}元/小时</view>
+      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price :item.member_house_price }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text></view>
       <view class='order' data-typeindex="{{index}}" bindtap="bookingRoom" >预定</view>
     </view>
   </view>
