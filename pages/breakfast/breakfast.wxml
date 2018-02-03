@@ -5,24 +5,25 @@
 <!--未使用  -->
 <view style="display:{{currentTab==0 ? '' : 'none'}}">
   <view class='item' wx:for="{{couponsList}}" wx:key="id">
-    <image class='img' src='../../image/gold.png'></image>
-    <text class='title'>{{item.name}}</text>
-    <text class='info'>{{item.tip}}</text>
-    <text class='single'>{{item.people}}</text>
-    <text class='quan'>{{item.type}}</text>
-    <text class='num'>x{{item.num}}</text>
+    <image class='img' src='../../image/gold.png' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}"></image>
+    <text class='title' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}">缀美主题酒店</text>
+    <text class='info' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}">请至前台领取使用</text>
+    <text class='single' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}">单人</text>
+    <text class='quan' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}">{{item.brekker_ticket}}</text>
+    <text class='num' wx:if="{{item.deleted_at == '' || item.deleted_at == null}}">x1</text>
   </view>
 </view>
 <!--已使用  -->
 <view style="display:{{currentTab==1 ? '' : 'none'}}">
-  <view class='item' wx:for="{{unUseCouponsList}}" wx:key="id">
-    <image class='img' src='../../image/gray.png'></image>
-    <text class='title'>{{item.name}}</text>
-    <text class='info'>{{item.tip}}</text>
-    <text class='single'>{{item.people}}</text>
-    <text class='quan'>{{item.type}}</text>
-    <text class='num'>x{{item.num}}</text>
-    <image class='use' src='../../image/use.png'></image>
+
+  <view class='item' wx:for="{{couponsList}}" wx:key="id">
+    <image class='img' src='../../image/gray.png' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}"></image>
+    <text class='title' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}">缀美主题酒店</text>
+    <text class='info' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}">请至前台领取使用</text>
+    <text class='single' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}">单人</text>
+    <text class='quan' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}">{{item.brekker_ticket}}</text>
+    <text class='num' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}">x1</text> 
+    <image class='use' src='../../image/use.png' wx:if="{{item.deleted_at != '' && item.deleted_at != null}}"></image>
   </view>
 </view>
 

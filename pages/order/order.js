@@ -27,7 +27,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getUserAccountInfo();
     this.bookingInformation = JSON.parse(options.bookingInformation);
     console.log("bookingInformation :", this.bookingInformation);
     var differ = DateUtils.daysDiffer(this.bookingInformation.checkInOutDate.checkInDate, this.bookingInformation.checkInOutDate.checkOutDate);
@@ -42,15 +41,6 @@ Page({
       chargeType: this.bookingInformation.charge_type
     });
     this.updateTotalFee();
-  },
-  getUserAccountInfo:function(){
-    var url="/order/current";
-    var jsonData={
-      session:getApp().globalData.session_key
-    }
-    request.httpsGetRequest(url,jsonData,function(res){
-      console.log(res)
-    })
   },
   updateTotalFee: function () {
     if (this.bookingInformation.charge_type == 0) {//分时房

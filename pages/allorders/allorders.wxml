@@ -12,7 +12,7 @@
   <view class='item' wx:for="{{allOrders}}" wx:key="id">
     <view class='up'>
       <view class='one'>
-        <text class='title'>{{item.id}}</text>
+        <text class='title'>{{item.room_detail[0].name}}</text>
         <view class='chotel ditem' wx:if="item.order_state == 0">待处理</view>
         <view class='chotel itemed' wx:elif="item.order_state == 1">已接单</view>
         <view class='chotel unitem' wx:elif="item.order_state == 2">已拒单</view>

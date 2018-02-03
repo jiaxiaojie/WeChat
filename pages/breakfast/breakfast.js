@@ -1,4 +1,5 @@
 // pages/breakfast/breakfast.js
+var request = require("../../utils/Request.js");
 Page({
 
   /**
@@ -6,27 +7,28 @@ Page({
    */
   data: {
     currentTab: 0,
-    couponsList:[
-      {id:1, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1},
-      { id:2,name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
-      { id: 3, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 }
-      ],
-    unUseCouponsList:[
-      { id: 1, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
-      { id: 2, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 },
-      { id: 3, name: "主题酒店", tip: "请至前台领取", people: "单人", type: "早餐券", num: 1 }
-    ]
+    couponsList:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this;
+    let url = "/coupon/breakfast-ticket";
+    let jsonData = {
+      session: getApp().globalData.session_key
+    };
+    request.httpsGetRequest(url, jsonData, function (res) {
+      that.setData({
+        couponsList : res.data.brekker_ticket
+      })
+      console.log(that.data.couponsList)
+    })
   },
   swichNav:function(e){
-    var that = this
-    var current = e.target.dataset.current
+    var that = this;
+    var current = e.target.dataset.current;
     if (this.data.currentTab === current) {
       return false;
     } else {
@@ -35,6 +37,7 @@ Page({
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

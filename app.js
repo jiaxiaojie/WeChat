@@ -26,7 +26,9 @@ App({
                       var data = loginResult.data.data;
                       console.info(data.session)
                       that.globalData.session_key = data.session;
-                      that.globalData.m_remain_time = data.remain_time;
+                      that.globalData.g_remain_min_minutes = data.remain_min_minutes;
+                      that.globalData.g_remain_max_minutes = data.remain_max_minutes;
+                      that.globalData.g_sum_money = data.sum_money;
                     }
                   })
                 }
@@ -44,6 +46,7 @@ App({
                   that.globalData.session_key = data.session;
                   that.globalData.g_remain_min_minutes = data.remain_min_minutes;
                   that.globalData.g_remain_max_minutes = data.remain_max_minutes;
+                  that.globalData.g_sum_money = data.sum_money;
                 }
               })
             }
@@ -100,6 +103,7 @@ App({
     g_remain_time: '',
     g_remain_min_minutes:'',
     g_remain_max_minutes:'',
+    g_sum_money:'',
     host: "https://hotel.chengxu-tec.com/api"
   }
 })
