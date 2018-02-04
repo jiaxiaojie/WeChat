@@ -123,7 +123,7 @@ Page({
     var flag = true;//判断信息输入是否完整 
     var that = this;
     //判断的顺序依次是：姓名-手机号
-    console.info(e)
+    //console.info(e)
     if (e.detail.value.name == "") {
       warn = "请填写您的姓名！";
     } else if (e.detail.value.tel == "") {
@@ -151,16 +151,17 @@ Page({
 
       var orderInfo = {
         id: 0,
-        stay_begintime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd hh:mm:ss'),
-        stay_endtime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd hh:mm:ss'),
+        stay_begintime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd'),
+        stay_endtime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd'),
         pay_type: that.bookingInformation.charge_type,
         people_detail: people_details,
-        room_detail: room
+        room_detail: room,
+        session: getApp().globalData.session_key
       }
       console.log(orderInfo);
       wx.request({
         url: getApp().globalData.host + '/order/add',
-        data: orderInfo,
+        data: orderInfo,/// { session: getApp().globalData.session_key, data:orderInfo },
         method: 'POST',
         success: function (result) {
           console.log(result);  
