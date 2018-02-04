@@ -18,22 +18,20 @@
 <view class='content'>
   <view class='item items'>
     <text>{{roomType}}</text>
-    <view class="btn-numbox">
+    <!-- <view class="btn-numbox">
       <view class="count">
-        <!-- <text id="num-jian" class="num-jian" bindtap="bindMinus">-</text> -->
-        <text id="num-jian" class="num-jian">-</text>
+        <text id="num-jian" class="num-jian" bindtap="bindMinus">-</text> 
         <input type="number" class="input-num" bindchange="bindManual" id="input-num" value="{{avalibleRoomNumber}}" />
-        <text id="num-jia" class="num-jia">+</text>
-        <!-- <text id="num-jia" class="num-jia" bindtap="bindPlus">+</text> -->
+        <text id="num-jia" class="num-jia" bindtap="bindPlus">+</text> 
       </view>
-      </view>
+    </view> -->
   </view>
   <view wx:for="{{[1, 2, 3, 4, 5]}}">
     <view class='item' wx:if="{{index < currentCustomerNumber}}" >
       <text>姓名</text>
       <input class='cnt' type='text' name="name" bindchange="bindUserName"  data-customerindex="{{index}}" placeholder='请输入您的真实姓名'></input>
       <text wx:if="{{index == (currentCustomerNumber -1) && index !=4 }}" bindtap="addCustomerNumber" >添加</text>
-      <text wx:if="{{index == (currentCustomerNumber -1) && index !=0}}" bindtap="delCustomerNumber" >删除</text>
+      <text style='margin-left:10px' wx:if="{{index == (currentCustomerNumber -1) && index !=0}}" bindtap="delCustomerNumber" >删除</text>
     </view>
   </view>
 

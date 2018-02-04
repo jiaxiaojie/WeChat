@@ -20,8 +20,30 @@ Page({
       that.setData({
         currentTab: current
       });
-      that.data.allOrders = 1;
+      // that.data.allOrders = 1;
     }
+  },
+  //支付
+  goPay: function (e) {
+    var requestUrl = "/order/cancel";
+    if (e.target.dataset.hasOwnProperty("id")) {
+      var orderId = e.target.dataset.id;
+    }
+    var jsonData = {
+      id: orderId,
+      session: getApp().globalData.session_key
+    };
+    wx.requestPayment({
+      'timeStamp': '',
+      'nonceStr': '',
+      'package': '',
+      'signType': 'MD5',
+      'paySign': '',
+      'success': function (res) {
+      },
+      'fail': function (res) {
+      }
+    })
   },
   //取消支付
   cancelPay:function(e){
@@ -59,8 +81,8 @@ Page({
     if (options){
       this.setData({
         currentTab: options.tab
-      })
-    };
+    })
+  };
 
     //获取用户的全部订单
     var requestUrl = "/order";
@@ -75,10 +97,11 @@ Page({
         var newOrderList = oldOrderList.map(function (value) {
           console.log(value)
           var date1 = moment(new Date(value.come_at)); //开始时间
-          var date2 = moment(new Date(value.created_at));//结束时间
+          var date2 = moment(new Date(value.leave_at));//结束时间
           var differHours = date2.diff(date1, 'hours');
           var differMinutes = (date2.diff(date1, 'minutes')) % 60;
-          value.come_at = moment(value.come_at).format('YYYY-MM-DD'); 
+          value.come_at = moment(value.come_at).format('YYYY-MM-DD');
+          value.leave_at = moment(value.leave_at).format('YYYY-MM-DD');  
           value.differH = differHours;
           value.differM = differMinutes;
           console.log(value)

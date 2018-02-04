@@ -65,16 +65,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(getApp().globalData.session_key)
     var session = {
       session: getApp().globalData.session_key
     };
      //获取房间价格
     request.httpsGetRequest('/room', session,function(res){
       let data = res.data;
-      console.log(data)
-      let houseListFrist = data.rooms[0];
       
+      let houseListFrist = data.day_rooms[1];
+      console.log(data)
       that.setData({
        memberTimePrice : houseListFrist.member_timekeeping_price,
        timePrice: houseListFrist.timekeeping_price

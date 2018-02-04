@@ -117,9 +117,11 @@ Page({
       });
     }
   },
+
   submitOrder: function (e) {
     var warn = "";//弹框时提示的内容  
     var flag = true;//判断信息输入是否完整 
+    var that = this;
     //判断的顺序依次是：姓名-手机号
     console.info(e)
     if (e.detail.value.name == "") {
@@ -130,10 +132,44 @@ Page({
       warn = "手机号格式不正确";
     } else {
       flag = false;//若必要信息都填写，则不用弹框，且页面可以进行跳转  
-      var that = this;
+      
+      var people_details = [];
+      for (var i = 0; i < that.currentCustomerNumber; i++) {
+        var pName = that.customerNamesArray[i];
+        var people_detail = {
+          name: that.customerNamesArray[i],
+          cardid: "",
+          mobile: that.phoneNumber
+        }
+        people_details.push(people_detail);
+      }
+
+      var room = {
+        house_id: that.bookingInformation.id,
+        number: 1
+      }
+
+      var orderInfo = {
+        id: 0,
+        stay_begintime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd hh:mm:ss'),
+        stay_endtime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd hh:mm:ss'),
+        pay_type: that.bookingInformation.charge_type,
+        people_detail: people_details,
+        room_detail: room
+      }
+      console.log(orderInfo);
+      wx.request({
+        url: getApp().globalData.host + '/order/add',
+        data: orderInfo,
+        method: 'POST',
+        success: function (result) {
+          console.log(result);  
+        }
+      });
+
       //？后面跟的是需要传递到下一个页面的参数  
       // wx.navigateTo({
-      //   url: '../confirmForest/confirmForest?area=' + e.detail.value.area + '&tel=' + e.detail.value.tel'
+      //   url: '../confirm/confirm?name=' + e.detail.value.area + '&tel=' + e.detail.value.tel
       // })
       console.log('form发生了submit事件，携带数据为：', e.detail.value);
     }
@@ -146,28 +182,8 @@ Page({
       })
     }
 
-    // if (this.userName === "") {
-    //   wx.showToast({
-    //     title: '请输入您的姓名',
-    //     icon: 'none',
-    //     duration: 1500
-    //   })
-    //   return;
-    // }
-    // if (this.phoneNumber === "") {
-    //   wx.showToast({
-    //     title: '请输入您的手机号码',
-    //     icon: 'none',
-    //     duration: 1500
-    //   })
-    //   return;
-    // }
 
-    console.log(DateUtils.formatFuc(this.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd hh:mm:ss'));
-    console.log(DateUtils.formatFuc(this.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd hh:mm:ss'));
-    console.log(this.userName);
-    console.log(this.phoneNumber);
-    console.log(this.bookingInformation.id);
+
   },
   /**
    * 用户点击右上角分享

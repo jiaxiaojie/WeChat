@@ -114,7 +114,7 @@
   text-align: center;
   line-height: 60rpx;
   border: 1px solid #BA8E52;
-  margin-left:215rpx;
+  /* margin-left:215rpx; */
 }
 .emptyInfo{
   padding: 100rpx;

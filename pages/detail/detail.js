@@ -50,6 +50,7 @@ Page({
   tabFun: function (e) {
     //获取触发事件组件的dataset属性  
     this.currentTabIndex = e.target.dataset.id;
+    
     this.listCurrentRoom();
     this.setData({
       currentTabIndex: e.target.dataset.id
@@ -86,10 +87,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     this.checkInOutDate = JSON.parse(options.CheckInOutDate);
-
     that.g_checkInDate = this.checkInOutDate.checkInDate;
     that.g_checkOutDate = this.checkInOutDate.checkOutDate;
-
     var differ = DateUtils.daysDiffer(this.g_checkInDate, this.g_checkOutDate);
 
     that.setData({
@@ -110,7 +109,12 @@ Page({
       success: function (result) {
         console.log(result);
         that.roomInformation = [];
-        var rooms = result.data.data.rooms;
+        var rooms;
+        if (that.currentTabIndex == 0)
+          rooms = result.data.data.minute_rooms;
+        else
+          rooms = result.data.data.day_rooms;
+        
         var house_type = result.data.data.house_type;
         for (var index in rooms) {
           var charge_type = rooms[index].charge_type;
@@ -120,7 +124,7 @@ Page({
             ///console.log(charge_type, that.currentTabIndex);
           }
         }
-        //console.log(that.roomInformation);
+        console.log(that.roomInformation);
         for (var index in that.roomInformation) {
           var roomType = that.roomInformation[index].house_type_id;
           ///console.log(roomType);

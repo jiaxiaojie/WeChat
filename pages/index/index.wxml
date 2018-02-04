@@ -19,7 +19,7 @@
     <image src='../../image/card.png'></image>
     <view>卡券</view>
   </view>
-   <view class='item' bindtap='viewMember'>
+  <view class='item' bindtap='viewMember'>
     <image src='../../image/member.png'></image>
     <view>会员</view>
   </view>
