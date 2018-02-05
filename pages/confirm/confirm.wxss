@@ -1,0 +1,102 @@
+/* pages/confirm/confirm.wxss */
+.header{
+  width:100%;
+  border-top:2rpx solid #e1e1e1;
+  border-bottom:2rpx solid #e1e1e1;
+  padding:22rpx 60rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  height:130rpx;
+}
+.header image{
+  width:618rpx;
+  height:86rpx; 
+}
+.kind{
+  width:100%;
+  border-bottom:2rpx solid #e1e1e1;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  padding:20rpx 90rpx 30rpx 90rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  flex-direction: column;
+}
+@font-face {
+  font-family: 'iconfont';  
+  src: url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.eot');
+  src: url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_551568_lyoz2ldozvtsatt9.svg#iconfont') format('svg');
+}
+.kind .info{
+  font-size:22rpx;
+  color:#999;
+}
+.pay{
+  border-bottom:2rpx solid #e1e1e1;
+  height:84rpx;
+  width: 100%;
+  background-color: #fff;
+  line-height: 84rpx;
+}
+.cancel{
+  padding:20rpx 80rpx 10rpx;
+  background-color: #fff;
+}
+.cancel .info{
+  font-size:22rpx;
+  color:#999;
+}
+.cancel .btn{
+  width:160rpx;
+  height:50rpx;
+  font-size:26rpx;
+  border:2rpx solid #999;
+  text-align: center;
+  line-height: 50rpx;
+  margin-top:20rpx;
+  color:#949494;
+  margin-left:420rpx;
+}
+.detail{
+  margin-top:20rpx;
+  width: 100%;
+  height: 200rpx;
+  box-sizing: border-box;
+  padding:34rpx 30rpx 44rpx 34rpx;
+  font-size: 24rpx;
+  color:#999;
+  background-color: #fff;
+}
+.order{
+  margin-top:20rpx;
+  width: 100%;
+  height: 180rpx;
+  box-sizing: border-box;
+  padding:34rpx 30rpx 44rpx 34rpx;
+  font-size: 24rpx;
+  color:#999;
+  background-color: #fff;
+}
+.detail .title{
+  font-size: 28rpx;
+  color: #333;
+}
+.detail .info{
+  display: flex;
+  justify-content:space-between;
+  margin-top:20rpx;
+  margin-bottom:10rpx;
+}
+.invoice{
+  height: 60rpx;
+  width: 100%;
+  background-color: #fff;
+  padding-left:30rpx;
+  margin-top:20rpx;
+  font-size:24rpx;
+  line-height: 60rpx;
+}

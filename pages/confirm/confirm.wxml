@@ -1,0 +1,42 @@
+<view class='header'>
+  <image src='../../image/bd.png'></image>
+</view>
+<view class='kind'>
+    <view style='color:#666;font-size:24rpx;'>温馨提示</view>
+    <view class='info'><text class="iconfont icon-gantanhao"></text>订单确认后,请携带所有入住人有效身份证,于入住当日办理入住,如果提前入住或延迟退房请联系商家</view>
+</view>
+<view class='pay'>
+  <text style='color:#333;font-size:26rpx;margin-left:66rpx;'>在线支付</text>
+  <text style='color:#e2231a;font-size:26rpx;margin-left:47rpx;'>{{orderPrice}}元</text>
+</view>
+<view class='cancel'>
+   <view class='info'><text class="iconfont icon-gantanhao"></text>订单确认后,不可取消，变更,如来入住,酒店将扣除全额房费,房间整晚保留,请及时入住</view>
+   <view class='btn' bindtap='cancel'>取消订单</view>
+</view>
+<view class='detail'>
+  <view class='title'>苏州缀美主题酒店</view>
+  <view class='info'>
+    <view>入住:
+      <text style="color:#000;">{{checkinData}}</text>
+    </view>
+    <view style='margin-left:160rpx;margin-right:120rpx;'>离店:
+      <text style="color:#000;">{{checkoutData}}</text>
+    </view>
+    <view>共
+      <text>{{totalnight}} </text>晚</view>
+  </view>
+  <view class='footer'>苏州管前街1100号</view>
+</view>
+<view class='order'>
+  <text style='font-size: 28rpx; color:#333;'>预定信息</text>
+  <view style='margin-top:10rpx;'>入住人:
+      <text style="color:#000;margin-left:20rpx;">{{userInfo.name}}</text>
+  </view>
+  <view style='margin-top:10rpx;'>电话号码:
+      <text style="color:#000;margin-left:20rpx;">{{userInfo.tel}}</text>
+  </view>
+</view>
+<view class='invoice'>
+发票 <text style='margin-left:100rpx;'>如需发票请向酒店索取</text>
+</view>
+
