@@ -8,19 +8,20 @@ Page({
   currentDetailIndex: 0,
   g_checkInDate: null,
   g_checkOutDate: null,
-
+  isFold: false,
   data: {
     checkInDate: 0,
     checkInDays: 0,
     roomInformation: null,
-    isFold: true,
+    isFold: false,
     currentDetailIndex: 0,
+
     // checkInDate: "",
     // checkOutDate: "",
     // weekDay: ""
   },
 
-//选择入住日期
+  //选择入住日期
   //CheckIn & Checkout date select
   dateSelect: function () {
     //url='../dateSelect/dateSelect'
@@ -33,7 +34,7 @@ Page({
       url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
     });
   },
-  
+
   updateCheckInOutDate: function () {
     //console.log(this.g_checkInDate, this.g_checkOutDate); 
     this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
@@ -47,22 +48,30 @@ Page({
       weekDay: this.weekDay
     })
   },
+
   tabFun: function (e) {
     //获取触发事件组件的dataset属性  
     this.currentTabIndex = e.target.dataset.id;
-    
+
     this.listCurrentRoom();
     this.setData({
-      currentTabIndex: e.target.dataset.id
+      currentTabIndex: this.currentTabIndex
     });
   },
 
   // 展开
   foldFn: function (e) {
     this.currentDetailIndex = e.target.dataset.typeindex;
+    this.isFold = !this.isFold;
+    console.log("currentDetailIndex ", this.currentDetailIndex, "isFold ", this. isFold);
     this.setData({
       currentDetailIndex: this.currentDetailIndex,
+      isFold: this.isFold
     });
+    // this.setData({
+    //   currentDetailIndex: this.currentDetailIndex,
+    //   isFold: !this.data.isFold
+    // });
   },
 
   //预定指定房型的房间
@@ -95,7 +104,8 @@ Page({
       checkInDate: DateUtils.formatFuc(this.checkInOutDate.checkInDate, 'MM-dd'),
       checkInDays: differ,
       currentDetailIndex: that.currentDetailIndex,
-      currentTabIndex: that.currentTabIndex
+      currentTabIndex: that.currentTabIndex,
+      isFold: this.isFold
     });
     this.listCurrentRoom();
   },
@@ -114,7 +124,7 @@ Page({
           rooms = result.data.data.minute_rooms;
         else
           rooms = result.data.data.day_rooms;
-        
+
         var house_type = result.data.data.house_type;
         for (var index in rooms) {
           var charge_type = rooms[index].charge_type;
@@ -130,8 +140,12 @@ Page({
           ///console.log(roomType);
           that.roomInformation[index].roomType = house_type[roomType];
         }
+        that.currentDetailIndex = 0;
+        that.isFold = false;
         that.setData({
-          roomInformation: that.roomInformation
+          roomInformation: that.roomInformation,
+          currentDetailIndex:that.currentDetailIndex,
+          isFold:that.isFold
         });
         ///console.log(that.roomInformation);
       }

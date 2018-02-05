@@ -20,12 +20,11 @@ Page({
       that.setData({
         currentTab: current
       });
-      // that.data.allOrders = 1;
     }
   },
   //支付
   goPay: function (e) {
-    var requestUrl = "/order/cancel";
+    var requestUrl = "/order/pay";
     if (e.target.dataset.hasOwnProperty("id")) {
       var orderId = e.target.dataset.id;
     }

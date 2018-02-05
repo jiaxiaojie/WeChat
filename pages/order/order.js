@@ -144,13 +144,10 @@ Page({
         people_details.push(people_detail);
       }
 
-      var room = {
-        house_id: that.bookingInformation.id,
-        number: 1
-      }
-
+      var room = [{
+        house_id: that.bookingInformation.id
+      }]
       var orderInfo = {
-        id: 0,
         stay_begintime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkInDate, 'yyyy-MM-dd'),
         stay_endtime: DateUtils.formatFuc(that.bookingInformation.checkInOutDate.checkOutDate, 'yyyy-MM-dd'),
         pay_type: that.bookingInformation.charge_type,
@@ -161,7 +158,7 @@ Page({
       console.log(orderInfo);
       wx.request({
         url: getApp().globalData.host + '/order/add',
-        data: orderInfo,/// { session: getApp().globalData.session_key, data:orderInfo },
+        data: orderInfo,
         method: 'POST',
         success: function (result) {
           console.log(result);  

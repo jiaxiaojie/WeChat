@@ -58,7 +58,8 @@
 <!--提交订单  -->
 <view class='suborder'>
   <view class='left'>
-    <text class='price'>¥ {{totalFee}}</text>
+    <text class='price' wx:if="{{chargeType == 0}}">{{totalFee}}</text>
+    <text class='price' wx:else>¥ {{totalFee}}</text>
     <text class='intro'>剩余金额将返还至个人账号</text>
     <!-- <text class='detail'>明细</text> -->
     <image class='imgs' src='../../image/upangel.png'></image>

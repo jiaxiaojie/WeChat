@@ -34,16 +34,18 @@ Page({
       };
       request.httpsPostRequest('/pay/custom-pay', data, function (res) {
         console.log(res)
-        if(res.errcode !== 0){
-          console.log('go recharge')
+        if(res.errcode == 0){
           wx.requestPayment({
-            'timeStamp': '222',
-            'nonceStr': '',
-            'package': '',
-            'signType': 'MD5',
-            'paySign': '',
+            'timeStamp': res.data.pay_config.timeStamp,
+            'nonceStr': res.data.pay_config.nonceStr,
+            'package': res.data.pay_config.package,
+            'signType': res.data.pay_config.signType,
+            'paySign': res.data.pay_config.paySign,
             'success': function (res) {
               console.log(res.errMsg)
+              wx.navigateTo({
+                url: '../person/person',
+              })
             },
             'fail': function (res) {
               console.log(res.errMsg)
