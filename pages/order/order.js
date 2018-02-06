@@ -42,8 +42,8 @@ Page({
       roomType: this.bookingInformation.house_name,
       chargeType: this.bookingInformation.charge_type
     });
-    this.updateTotalFee();
     this.getMemberInfo();
+    this.updateTotalFee();
   },
   getMemberInfo:function(){
     let that = this;
@@ -57,7 +57,7 @@ Page({
       let data = res.data.info;
       that.setData({
         leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
-        payAmount: that.bookingInformation.member_house_price
+        payAmount: that.bookingInformation.member_house_price * 100 * that.data.checkInNights
       })
     })
 
@@ -65,9 +65,9 @@ Page({
   updateTotalFee: function () {
     if (this.bookingInformation.charge_type == 0) {//分时房
       this.totalFee = this.avalibleRoomNumber * (this.bookingInformation.cleaning_fee +
-        this.bookingInformation.member_timekeeping_price);
+        this.bookingInformation.member_timekeeping_price) * 100;
     } else if (this.bookingInformation.charge_type == 1) {//天时房
-      this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price;
+      this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price *100;
     } else {
       this.totalFee = 0;
     }

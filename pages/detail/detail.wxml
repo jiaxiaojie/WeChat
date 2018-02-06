@@ -65,7 +65,7 @@
         <view style='font-size:22rpx; color:#999;'>仅剩{{item.residue_house_quantity}}间</view>
       </view>
       <view class='intro'>{{item.roomType}}/无窗/{{item.breakfast}}早{{item.info}}</view>
-      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price/100:item.member_house_price/100 }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text></view>
+      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price/100:item.member_house_price*100 }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text></view>
       <view class='order' data-typeindex="{{index}}" bindtap="bookingRoom" >预定</view>
     </view>
   </view>
