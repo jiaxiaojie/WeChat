@@ -25,9 +25,8 @@ Page({
       session: getApp().globalData.session_key
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      // that.time_fun(res.data.check_in_time);
-      console.info(res.data.check_in_time)
-      that.time_fun();
+      that.time_fun(res.data.check_in_time);
+      // console.info(res.data.check_in_time)
       that.setData({
         time: parseInt(res.data.remain_time)
       })
@@ -37,9 +36,7 @@ Page({
     return n >= 10 ? n : "0" + n;
   },
   //计时器
-  time_fun() {
-    
-    let checkTime = 3600;
+  time_fun(checkTime) {
     var sec= 0;
     var that=this;
     var stime=setInterval(function () {
