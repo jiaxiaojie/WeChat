@@ -52,11 +52,11 @@ Page({
   tabFun: function (e) {
     //获取触发事件组件的dataset属性  
     this.currentTabIndex = e.target.dataset.id;
-
-    this.listCurrentRoom();
     this.setData({
       currentTabIndex: this.currentTabIndex
     });
+    this.listCurrentRoom();
+    
   },
 
   // 展开

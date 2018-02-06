@@ -46,6 +46,30 @@ Page({
       // var differTime = curDate.getTime() - checkInDate.getTime();
       var differTime = checkTime*1000 + sec*1000;
 
+      if(differTime >= 100*60*60*1000){
+        var h = 99;
+        var m = 59;
+        var s = 59;
+        that.setData({
+          h1: h.toString().split('')[0]
+        })
+        that.setData({
+          h2: h.toString().split('')[1]
+        })
+        that.setData({
+          m1: m.toString().split('')[0]
+        })
+        that.setData({
+          m2: m.toString().split('')[1]
+        })
+        that.setData({
+          s1: s.toString().split('')[0]
+        })
+        that.setData({
+          s2: s.toString().split('')[1]
+        })
+      }else{
+
       //计算相差小时数
       var hours = Math.floor(differTime / (3600 * 1000));
       //计算相差分钟数  
@@ -79,6 +103,7 @@ Page({
       that.setData({
         s2: s.toString().split('')[1]
       })
+      };
     }, 1000);
   },
   //退房
