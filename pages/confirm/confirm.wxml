@@ -25,7 +25,7 @@
     <view>共
       <text>{{totalnight}} </text>晚</view>
   </view>
-  <view class='footer'>苏州管前街1100号</view>
+  <view class='footer'>苏州市观前街旧学前88号</view>
 </view>
 <view class='order'>
   <text style='font-size: 28rpx; color:#333;'>预定信息</text>

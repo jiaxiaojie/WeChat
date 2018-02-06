@@ -26,7 +26,6 @@ Page({
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
       that.time_fun(res.data.check_in_time);
-      // console.info(res.data.check_in_time)
       that.setData({
         time: parseInt(res.data.remain_time)
       })
@@ -58,10 +57,7 @@ Page({
        //计算分钟数后剩余的毫秒数  
       var leave2 = leave1 % (60 * 1000)     
       var seconds = Math.round(leave2 / 1000)
-      // date.setSeconds(sec);
-      // var h = that.two_char(date.getHours());
-      // var m = that.two_char(date.getMinutes());
-      // var s = that.two_char(date.getSeconds());
+      
       var h = that.two_char(hours);
       var m = that.two_char(minutes);
       var s = that.two_char(seconds);

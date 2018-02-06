@@ -1,5 +1,5 @@
 <view class='banner'>
-  <image class='img' src='http://preview.quanjing.com/ph060/ph1980-p01382.jpg'></image>
+  <image class='img' src='../../image/banner.jpg'></image>
   <view class='info'>
     <text style='left:30rpx;top:20rpx;font-size:32rpx;'>苏州缀美主题酒店</text>
     <text style='left:30rpx;top:68rpx;'>2018年装修</text>
