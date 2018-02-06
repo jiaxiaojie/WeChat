@@ -51,14 +51,13 @@
       </view>
       <view style='font-size:24rpx;color:#666;pointer-events: none;'>
         <text style='text-decoration:line-through'>
-          ¥ {{currentTabIndex =='0' ? item.timekeeping_price :item.house_price }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text>
+          ¥ {{currentTabIndex =='0' ? item.timekeeping_price/100 :item.house_price * 100}}元<text hidden='{{item.charge_type == 1}}'>/分钟</text>
         </text>
         <text style='font-size:22rpx; color:#999;margin-right:20rpx;'>（门市价）</text>
          <image wx:if='{{!isFold && index == currentDetailIndex}}' style='width: 22rpx;height: 12rpx;' src='../../image/upangel.png' ></image> 
          <image wx:else style='width: 22rpx;height: 12rpx;' src='../../image/dangel.png' ></image>
       </view>
     </view>
-    <!-- hidden="{{ currentDetailIndex != index && isFold }}" -->
     <view class="items" style='background:#F8F8F8;' wx:if='{{!isFold && index == currentDetailIndex}}'>
       <view class='member'>
         会员价
@@ -66,7 +65,7 @@
         <view style='font-size:22rpx; color:#999;'>仅剩{{item.residue_house_quantity}}间</view>
       </view>
       <view class='intro'>{{item.roomType}}/无窗/{{item.breakfast}}早{{item.info}}</view>
-      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price :item.member_house_price }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text></view>
+      <view class='time'>¥{{currentTabIndex =='0' ? item.member_timekeeping_price/100:item.member_house_price/100 }}元<text hidden='{{item.charge_type == 1}}'>/分钟</text></view>
       <view class='order' data-typeindex="{{index}}" bindtap="bookingRoom" >预定</view>
     </view>
   </view>

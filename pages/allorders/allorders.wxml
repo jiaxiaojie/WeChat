@@ -9,7 +9,7 @@
 <!--全部  -->
 <view style="display:{{currentTab==0 ? '' : 'none'}}">
   <view class='item' wx:for="{{allOrders}}" wx:key="id">
-    <navigator url='../confirm/confirm?id=item.id' wx:if="{{item.order_state == 0 || item.order_state == 1 }}">
+    <navigator url='../confirm/confirm?id={{item.id}}' wx:if="{{item.order_state == 0 || item.order_state == 1 }}">
       <view class='up'>
         <view class='one'>
           <text class='title'>{{item.room_detail[0].name}}</text>
@@ -138,7 +138,7 @@
 <view style="display:{{currentTab==2? '' : 'none'}}">
   <view wx:for="{{allOrders}}" wx:key="id">
     <view class='item' wx:if="{{item.order_state == 0 || item.order_state == 1}}">
-      <navigator url='../confirm/confirm?id=item.id'>
+      <navigator url='../confirm/confirm?id={{item.id}}'>
         <view class='up'>
           <view class='one'>
             <text class='title'>{{item.room_detail[0].name}}</text>

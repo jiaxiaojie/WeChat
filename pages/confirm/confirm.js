@@ -12,7 +12,8 @@ Page({
     totalnight:0,
     checkinDate:undefined,
     checkoutDate: undefined,
-    userInfo:null
+    userInfo:null,
+    orderId:''
   },
 
   /**
@@ -23,7 +24,7 @@ Page({
       let id = '';
       if (options){
         var jsonData = {
-          id: 3,
+          id: options.id,
           session: getApp().globalData.session_key
         };
       }
@@ -36,27 +37,19 @@ Page({
           let differDays = date2.diff(date1, 'days');
           console.log("differDays", differDays)
           that.setData({
-            orderPrice : orderInfos.order_price,
+            orderPrice : orderInfos.order_price*100,
             totalnight : differDays,
             checkinDate : moment(orderInfos.come_at).format('YYYY-MM-DD'),
             checkoutDate : moment(orderInfos.leave_at).format('YYYY-MM-DD'),
             userInfo : {
               name: orderInfos.people_detail[0].name,
               tel: orderInfos.people_detail[0].mobile
-            }
+            },
+            orderId: orderInfos.id
           })
-          
           console.log(that.data.userInfo)
       })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -77,35 +70,6 @@ Page({
     //   },
     // })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
   /**
    * 用户点击右上角分享
    */
@@ -113,17 +77,39 @@ Page({
   
   },
   cancel:function(){
+    var that = this;
     wx.showModal({
       title: '取消订单',
       content: '取消订单后,如需入住需再次预定,请确认您的操作',
       success: function (res) {
         if (res.confirm) {
-          console.log('再等等')
-          wx.navigateTo({
-            url: '../allorders/allorders?tab=2',
-          })
-        } else if (res.cancel) {
           console.log('确认取消')
+          let url = "/order/cancel";
+          let jsonData = {
+            id: that.data.orderId,
+            session:getApp().globalData.session_key
+          };
+          request.httpsPostRequest(url,jsonData,function(res){
+            console.log(res)
+            if(res.errcode == 0){
+              wx.showToast({
+                title: '取消成功',
+                icon:'none',
+                duration:1500
+              });
+              wx.navigateTo({
+                url: '../allorders/allorders?tab=2',
+              });
+            }else{
+              wx.showToast({
+                title: res.errmsg,
+                icon: 'none',
+                duration: 1500
+              });
+            }
+          });
+        } else if (res.cancel) {
+          console.log('再等等')
         }
       }
     })

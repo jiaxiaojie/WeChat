@@ -58,9 +58,15 @@
 <!--提交订单  -->
 <view class='suborder'>
   <view class='left'>
-    <text class='price' wx:if="{{chargeType == 0}}">{{totalFee}}</text>
-    <text class='price' wx:else>¥ {{totalFee}}</text>
-    <text class='intro'>剩余金额将返还至个人账号</text>
+    <block wx:if="{{chargeType == 0}}">
+      <text class='price' wx:if="{{leaveTime > 15}}">{{leaveTime}}分钟 <text style='color:#666;font-size:22rpx'>剩余入住时间</text></text>
+      <text class='price' wx:else>￥{{payAmount}} <text style='color:#666;font-size:22rpx'>剩余金额将返还至个人账号</text></text>
+      <text class='intro'>￥30 清洁费</text>
+    </block>
+    <block wx:else>
+      <text class='price'>¥{{totalFee}}</text>
+       <text class='intro'>剩余金额将返还至个人账号</text>
+    </block>
     <!-- <text class='detail'>明细</text> -->
     <image class='imgs' src='../../image/upangel.png'></image>
   </view>

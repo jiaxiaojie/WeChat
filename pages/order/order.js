@@ -21,7 +21,9 @@ Page({
     totalFee: 0,
     name: '',
     tel: '',
-    currentCustomerNumber: 1  
+    currentCustomerNumber: 1 ,
+    leaveTime:'',
+    payAmount:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -41,6 +43,24 @@ Page({
       chargeType: this.bookingInformation.charge_type
     });
     this.updateTotalFee();
+    this.getMemberInfo();
+  },
+  getMemberInfo:function(){
+    let that = this;
+    let url = "/member/info";
+    let jsonData = {
+      session:getApp().globalData.session_key
+    }
+    console.log(that.bookingInformation);
+    request.httpsGetRequest(url,jsonData,function(res){
+      console.log(res)
+      let data = res.data.info;
+      that.setData({
+        leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
+        payAmount: that.bookingInformation.member_house_price
+      })
+    })
+
   },
   updateTotalFee: function () {
     if (this.bookingInformation.charge_type == 0) {//分时房
@@ -73,10 +93,7 @@ Page({
     }
   },
   bindUserName: function (e) {
-    //console.log(e.target.dataset);
     var customeindex = e.target.dataset.customerindex;
-    //this.userName = e.detail.value;
-    //console.log("bindUserName ", customeindex, this.userName);
     this.customerNamesArray[customeindex] = e.detail.value;
   },
   bindPhoneNumber: function (e) {
@@ -132,7 +149,6 @@ Page({
       warn = "手机号格式不正确";
     } else {
       flag = false;//若必要信息都填写，则不用弹框，且页面可以进行跳转  
-      
       var people_details = [];
       for (var i = 0; i < that.currentCustomerNumber; i++) {
         var pName = that.customerNamesArray[i];
@@ -143,7 +159,6 @@ Page({
         }
         people_details.push(people_detail);
       }
-
       var room = [{
         house_id: that.bookingInformation.id
       }]
@@ -155,13 +170,37 @@ Page({
         room_detail: room,
         session: getApp().globalData.session_key
       }
-      console.log(orderInfo);
       wx.request({
         url: getApp().globalData.host + '/order/add',
         data: orderInfo,
         method: 'POST',
-        success: function (result) {
-          console.log(result);  
+        success: function (res) {
+          console.log(res);  
+          if (res.data.errcode == 0) {
+            wx.requestPayment({
+              'timeStamp': res.data.data.pay_config.timeStamp,
+              'nonceStr': res.data.data.pay_config.nonceStr,
+              'package': res.data.data.pay_config.package,
+              'signType': res.data.data.pay_config.signType,
+              'paySign': res.data.data.pay_config.paySign,
+              'success': function (res) {
+                console.log(res.errMsg)
+                wx.navigateTo({
+                  url: '../confirm/confirm',
+                })
+              },
+              'fail': function (res) {
+                console.log(res.errMsg)
+              }
+            })
+          } 
+          else {
+            wx.showToast({
+              title: res.data.errmsg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
         }
       });
 
