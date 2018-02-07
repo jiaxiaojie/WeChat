@@ -1,5 +1,5 @@
  <form bindsubmit="formSubmit">
-    <input class='money' type='number' name="amount" bindinput='bindAmountMoney' placeholder='请输入您的充值金额'></input>
+    <input class='money' type='number' name="amount" bindinput='bindAmountMoney' placeholder='请输入您的充值金额(分)'></input>
     <view class='time'>预计可使用时间为：{{minTime}}分钟-{{maxTime}}分钟</view>
     <view class='coupon'>
       <text>优惠券</text>

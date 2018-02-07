@@ -21,9 +21,7 @@ Page({
     var jsonData = {
       session: getApp().globalData.session_key
     };
-    console.log(getApp().globalData.session_key)
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      ///console.log(res)
       if (res.errcode == 0) {
         wx.navigateTo({
           url: '../stayleng/stayleng',
@@ -56,7 +54,6 @@ Page({
       checkInDate: this.g_checkInDate,
       checkOutDate: this.g_checkOutDate
     })
-    //console.info(CheckInOutDate)
     wx.navigateTo({
       url: "../detail/detail?CheckInOutDate=" + CheckInOutDate,
     });
@@ -66,26 +63,21 @@ Page({
   },
   //CheckIn & Checkout date select
   dateSelect: function () {
-    //url='../dateSelect/dateSelect'
     var CheckInOutDate = JSON.stringify({
       checkInDate: this.g_checkInDate,
       checkOutDate: this.g_checkOutDate
     })
-    //console.info(CheckInOutDate)
     wx.navigateTo({
       url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
     });
   },
 
   updateCheckInOutDate: function () {
-    //console.log(this.g_checkInDate, this.g_checkOutDate); 
     this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
     this.checkOutDate = DateUtils.formatFuc(this.g_checkOutDate, 'MM-dd');
     this.weekDay = DateUtils.formatFuc(this.g_checkInDate, 'E');
-    //console.log(this.checkInDate, this.checkOutDate, this.weekDay);
     this.setData({
       checkInDate: this.checkInDate,
-      ///checkOutDate: res.data.checkOutDate,
       weekDay: this.weekDay
     })
   },
@@ -97,14 +89,6 @@ Page({
     this.g_checkOutDate = DateUtils.addFuc(new Date(), 1, 'day');
     this.updateCheckInOutDate();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -125,35 +109,6 @@ Page({
       },
     })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

@@ -14,33 +14,25 @@ Page({
     checkInDays: 0,
     roomInformation: null,
     isFold: false,
-    currentDetailIndex: 0,
-
-    // checkInDate: "",
-    // checkOutDate: "",
-    // weekDay: ""
+    currentDetailIndex: 0
   },
 
   //选择入住日期
   //CheckIn & Checkout date select
   dateSelect: function () {
-    //url='../dateSelect/dateSelect'
     var CheckInOutDate = JSON.stringify({
       _checkInDate: this.g_checkInDate,
       _checkOutDate: this.g_checkOutDate
     })
-    //console.info(CheckInOutDate)
     wx.navigateTo({
       url: "../dateSelect/dateSelect?CheckInOutDate=" + CheckInOutDate,
     });
   },
 
   updateCheckInOutDate: function () {
-    //console.log(this.g_checkInDate, this.g_checkOutDate); 
     this.checkInDate = DateUtils.formatFuc(this.g_checkInDate, 'MM-dd');
     this.checkOutDate = DateUtils.formatFuc(this.g_checkOutDate, 'MM-dd');
     this.weekDay = DateUtils.formatFuc(this.g_checkInDate, 'E');
-    //console.log(this.checkInDate, this.checkOutDate, this.weekDay);
     var differ = DateUtils.daysDiffer(this.g_checkInDate, this.g_checkOutDate);
     this.setData({
       checkInDate: this.checkInDate,
@@ -63,15 +55,11 @@ Page({
   foldFn: function (e) {
     this.currentDetailIndex = e.target.dataset.typeindex;
     this.isFold = !this.isFold;
-    console.log("currentDetailIndex ", this.currentDetailIndex, "isFold ", this. isFold);
+    // console.log("currentDetailIndex ", this.currentDetailIndex, "isFold ", this. isFold);
     this.setData({
       currentDetailIndex: this.currentDetailIndex,
       isFold: this.isFold
     });
-    // this.setData({
-    //   currentDetailIndex: this.currentDetailIndex,
-    //   isFold: !this.data.isFold
-    // });
   },
 
   //预定指定房型的房间
@@ -79,7 +67,6 @@ Page({
     if (e.target.dataset.hasOwnProperty("typeindex")) {
       var roomTypeIndex = e.target.dataset.typeindex;
       var bookingInformation = this.roomInformation[roomTypeIndex];
-      ///this.checkInOutDate。_checkInDate: this.g_checkInDate
       var bookingInOutDate = {
         checkInDate: this.g_checkInDate,
         checkOutDate: this.g_checkOutDate
@@ -88,9 +75,7 @@ Page({
       wx.navigateTo({
         url: '../order/order?bookingInformation=' + JSON.stringify(bookingInformation),
       });
-      ///console.log(bookigInformation);
     }
-    //console.log("bookingRoom");
   },
 
   onLoad: function (options) {
@@ -117,45 +102,42 @@ Page({
       data: { session: getApp().globalData.session_key },
       method: 'GET',
       success: function (result) {
-        console.log(result);
-        that.roomInformation = [];
-        var rooms;
-        if (that.currentTabIndex == 0)
-          rooms = result.data.data.minute_rooms;
-        else
-          rooms = result.data.data.day_rooms;
-
-        var house_type = result.data.data.house_type;
-        for (var index in rooms) {
-          var charge_type = rooms[index].charge_type;
-          if (charge_type == that.currentTabIndex) {
-            that.roomInformation.push(rooms[index]);
-          } else {
-            ///console.log(charge_type, that.currentTabIndex);
+        if (result.data.errcode == 0){
+          that.roomInformation = [];
+          var rooms;
+          if (that.currentTabIndex == 0)
+            rooms = result.data.data.minute_rooms;
+          else
+            rooms = result.data.data.day_rooms;
+          var house_type = result.data.data.house_type;
+          for (var index in rooms) {
+            var charge_type = rooms[index].charge_type;
+            if (charge_type == that.currentTabIndex) {
+              that.roomInformation.push(rooms[index]);
+            } else {
+              ///console.log(charge_type, that.currentTabIndex);
+            }
           }
+          for (var index in that.roomInformation) {
+            var roomType = that.roomInformation[index].house_type_id;
+            that.roomInformation[index].roomType = house_type[roomType];
+          }
+          that.currentDetailIndex = 0;
+          that.isFold = false;
+          that.setData({
+            roomInformation: that.roomInformation,
+            currentDetailIndex: that.currentDetailIndex,
+            isFold: that.isFold
+          });
+        }else{
+          wx.showToast({
+            title: result.data.errmsg,
+            icon:'none',
+            duration:1500
+          })
         }
-        console.log(that.roomInformation);
-        for (var index in that.roomInformation) {
-          var roomType = that.roomInformation[index].house_type_id;
-          ///console.log(roomType);
-          that.roomInformation[index].roomType = house_type[roomType];
-        }
-        that.currentDetailIndex = 0;
-        that.isFold = false;
-        that.setData({
-          roomInformation: that.roomInformation,
-          currentDetailIndex:that.currentDetailIndex,
-          isFold:that.isFold
-        });
-        ///console.log(that.roomInformation);
       }
     });
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**
@@ -178,21 +160,6 @@ Page({
       },
     })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

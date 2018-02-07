@@ -30,24 +30,32 @@ Page({
       }
       var url = "/order";
       request.httpsGetRequest(url,jsonData,function(res){
-          console.log("用户当前订单信息:",res)
-          let orderInfos = res.data.orders[0];
-          let date1 = moment(new Date(orderInfos.come_at)); //开始时间
-          let date2 = moment(new Date(orderInfos.leave_at));//结束时间
-          let differDays = date2.diff(date1, 'days');
-          console.log("differDays", differDays)
-          that.setData({
-            orderPrice : orderInfos.order_price*100,
-            totalnight : differDays,
-            checkinDate : moment(orderInfos.come_at).format('YYYY-MM-DD'),
-            checkoutDate : moment(orderInfos.leave_at).format('YYYY-MM-DD'),
-            userInfo : {
-              name: orderInfos.people_detail[0].name,
-              tel: orderInfos.people_detail[0].mobile
-            },
-            orderId: orderInfos.id
-          })
-          console.log(that.data.userInfo)
+          // console.log("用户当前订单信息:",res)
+         if(res.errcode == 0){
+           let orderInfos = res.data.orders[0];
+           let date1 = moment(new Date(orderInfos.come_at)); //开始时间
+           let date2 = moment(new Date(orderInfos.leave_at));//结束时间
+           let differDays = date2.diff(date1, 'days');
+           // console.log("differDays", differDays)
+           that.setData({
+             orderPrice: orderInfos.order_price * 100,
+             totalnight: differDays,
+             checkinDate: moment(orderInfos.come_at).format('YYYY-MM-DD'),
+             checkoutDate: moment(orderInfos.leave_at).format('YYYY-MM-DD'),
+             userInfo: {
+               name: orderInfos.people_detail[0].name,
+               tel: orderInfos.people_detail[0].mobile
+             },
+             orderId: orderInfos.id
+           })
+          //  console.log(that.data.userInfo)
+         }else{
+           wx.showToast({
+             title: res.errmsg,
+             icon:'none',
+             duration:1500
+           })
+         }
       })
   },
   /**
@@ -90,7 +98,7 @@ Page({
             session:getApp().globalData.session_key
           };
           request.httpsPostRequest(url,jsonData,function(res){
-            console.log(res)
+            // console.log(res)
             if(res.errcode == 0){
               wx.showToast({
                 title: '取消成功',

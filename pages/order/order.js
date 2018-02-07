@@ -30,7 +30,7 @@ Page({
    */
   onLoad: function (options) {
     this.bookingInformation = JSON.parse(options.bookingInformation);
-    console.log("bookingInformation :", this.bookingInformation);
+    // console.log("bookingInformation :", this.bookingInformation);
     var differ = DateUtils.daysDiffer(this.bookingInformation.checkInOutDate.checkInDate, this.bookingInformation.checkInOutDate.checkOutDate);
     this.checkInNights = differ;
     this.customerNamesArray = ["","","","",""];
@@ -51,21 +51,24 @@ Page({
     let jsonData = {
       session:getApp().globalData.session_key
     }
-    console.log(that.bookingInformation);
+    // console.log(that.bookingInformation);
     request.httpsGetRequest(url,jsonData,function(res){
-      console.log(res)
       let data = res.data.info;
-      that.setData({
-        leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
-        payAmount: that.bookingInformation.member_house_price * 100 * that.data.checkInNights
-      })
+      if(res.errcode == 0){
+        that.setData({
+          leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
+          payAmount: that.bookingInformation.member_house_price * 100 * that.data.checkInNights
+        })
+      }else{
+        console.log(res.errmsg)
+      }
     })
 
   },
   updateTotalFee: function () {
     if (this.bookingInformation.charge_type == 0) {//分时房
-      this.totalFee = this.avalibleRoomNumber * (this.bookingInformation.cleaning_fee +
-        this.bookingInformation.member_timekeeping_price) * 100;
+      // this.totalFee = this.avalibleRoomNumber * (this.bookingInformation.cleaning_fee +
+      //   this.bookingInformation.member_timekeeping_price) * 100;
     } else if (this.bookingInformation.charge_type == 1) {//天时房
       this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price *100;
     } else {

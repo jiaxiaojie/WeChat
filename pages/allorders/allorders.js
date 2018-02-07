@@ -24,7 +24,7 @@ Page({
   },
   //支付
   goPay: function (e) {
-    var requestUrl = "/order/pay";
+    var requestUrl = "/order/repay-order";
     if (e.target.dataset.hasOwnProperty("id")) {
       var orderId = e.target.dataset.id;
     }
@@ -32,20 +32,37 @@ Page({
       id: orderId,
       session: getApp().globalData.session_key
     };
-    wx.requestPayment({
-      'timeStamp': '',
-      'nonceStr': '',
-      'package': '',
-      'signType': 'MD5',
-      'paySign': '',
-      'success': function (res) {
-      },
-      'fail': function (res) {
+    request.httpsGetRequest(requestUrl, jsonData,function(res){
+      if(res.errcode == 0){
+        wx.requestPayment({
+          'timeStamp': res.data.pay_config.timeStamp,
+          'nonceStr': res.data.pay_config.nonceStr,
+          'package': res.data.pay_config.package,
+          'signType': res.data.pay_config.signType,
+          'paySign': res.data.pay_config.paySign,
+          'success': function (res) {
+            console.log(res.errMsg)
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          },
+          'fail': function (res) {
+            console.log(res.errMsg)
+          }
+        })
+      }else{
+        wx.showToast({
+          title: res.errmsg,
+          icon:'none',
+          duration:1500
+        })
       }
-    })
+    });
+    
   },
   //取消支付
   cancelPay:function(e){
+    let that = this;
     var requestUrl = "/order/cancel";
     if (e.target.dataset.hasOwnProperty("id")){
       var orderId = e.target.dataset.id;
@@ -55,13 +72,14 @@ Page({
       session: getApp().globalData.session_key
     };
     request.httpsPostRequest(requestUrl, jsonData, function (res) {
-      console.log(res.errcode)
       if(res.errcode == 0){
         wx.showToast({
           title: '取消成功',
           icon: 'none',
           duration: 2000
-        })
+        });
+        //刷新页面
+        that.getAllOrders();
       }
       else{
         wx.showToast({
@@ -76,80 +94,50 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
     if (options){
       this.setData({
         currentTab: options.tab
-    })
+     })
+    }
+    this.getAllOrders();
+  },
+
+getAllOrders:function(){
+  let that = this;
+  //获取用户的全部订单
+  var requestUrl = "/order";
+  var jsonData = {
+    session: getApp().globalData.session_key
   };
+  request.httpsGetRequest(requestUrl, jsonData, function (res) {
+    if (res.errcode == 0) {
+      var oldOrderList = res.data.orders;
+      var newOrderList = [];
+      var newOrderList = oldOrderList.map(function (value) {
+        var date1 = moment(new Date(value.come_at)); //开始时间
+        var date2 = moment(new Date(value.leave_at));//结束时间
+        var differHours = date2.diff(date1, 'hours');
+        var differMinutes = (date2.diff(date1, 'minutes')) % 60;
+        value.come_at = moment(value.come_at).format('YYYY-MM-DD');
+        value.leave_at = moment(value.leave_at).format('YYYY-MM-DD');
+        value.differH = differHours;
+        value.differM = differMinutes;
+        return value;
+      })
+      that.setData({
+        allOrders: newOrderList
+      })
+    }
+    else {
+      wx.showToast({
+        title: res.errmsg,
+        icon: 'none',
+        duration: 1500
+      })
+    }
 
-    //获取用户的全部订单
-    var requestUrl = "/order";
-    var jsonData = {
-      session:getApp().globalData.session_key
-    };
-    request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      console.log(res)
-      if (res.errcode == 0) {
-        var oldOrderList = res.data.orders;
-        var newOrderList = [];
-        var newOrderList = oldOrderList.map(function (value) {
-          console.log(value)
-          var date1 = moment(new Date(value.come_at)); //开始时间
-          var date2 = moment(new Date(value.leave_at));//结束时间
-          var differHours = date2.diff(date1, 'hours');
-          var differMinutes = (date2.diff(date1, 'minutes')) % 60;
-          value.come_at = moment(value.come_at).format('YYYY-MM-DD');
-          value.leave_at = moment(value.leave_at).format('YYYY-MM-DD');  
-          value.differH = differHours;
-          value.differM = differMinutes;
-          console.log(value)
-          return value;
-        })
-        console.log(newOrderList);
-        that.setData({
-          allOrders: newOrderList
-        })
-      }
-      else {
-        wx.showToast({
-          title: res.errmsg,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-      
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
+  })
+},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

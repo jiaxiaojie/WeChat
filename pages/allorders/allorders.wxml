@@ -37,7 +37,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              188元
+              {{item.order_price}}
           </view> 
           <view class='cancel' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付
@@ -78,17 +78,19 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              188元
+              {{item.order_price*100}}元
           </view> 
-          <view class='cancel' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
-            取消支付
-          </view>
-          <view class='again' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
-            立即支付
-          </view>
+          <view style='display:flex'>
+            <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
+              取消支付
+            </view>
+            <view class='again' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
+              立即支付
+            </view>
+          </view>    
           <view class='again' hidden="{{item.order_state == 6}}">
-            <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
-          </view>
+              <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
+            </view> 
       </view>
     </view>
   </view>
@@ -118,14 +120,16 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              188元
+              {{item.order_price}}元
           </view> 
-          <view class='cancel' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
-            取消支付
-          </view>
-          <view class='again' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
-            立即支付
-          </view>
+          <view style='display:flex'>
+            <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
+              取消支付
+            </view>
+            <view class='again'  wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
+              立即支付
+            </view>
+          </view> 
           <view class='again' hidden="{{item.order_state == 6}}">
             <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
           </view>
@@ -159,7 +163,7 @@
               {{item.differH}}小时{{item.differM}}分钟
             </view>
             <view class='price' hidden="{{item.pay_type == 0}}">
-                188元
+                {{item.order_price}}元
             </view> 
             <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
               取消支付
@@ -200,7 +204,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              188元
+              {{item.order_price}}元
           </view> 
           <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付
@@ -240,7 +244,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              188元
+              {{item.order_price}}元
           </view> 
           <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付

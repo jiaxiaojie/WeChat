@@ -25,10 +25,18 @@ Page({
       session: getApp().globalData.session_key
     };
     request.httpsGetRequest(requestUrl, jsonData, function (res) {
-      that.time_fun(res.data.check_in_time);
-      that.setData({
-        time: parseInt(res.data.remain_time)
-      })
+      if(res.errcode == 0){
+        that.time_fun(res.data.check_in_time);
+        that.setData({
+          time: parseInt(res.data.remain_time)
+        })
+      }else{
+        wx.showToast({
+          title: res.errmsg,
+          icon:'none',
+          duration:1500
+        })
+      }
     });
   },
   two_char(n) {
@@ -68,6 +76,7 @@ Page({
         that.setData({
           s2: s.toString().split('')[1]
         })
+        return;
       }else{
 
       //计算相差小时数

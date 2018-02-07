@@ -42,7 +42,6 @@ App({
     wx.getUserInfo({
       lang: "zh_CN",
       success: function (userRes) {
-        console.log(userRes)
         that.globalData.g_userInfo = userRes.userInfo;
         //发起网络请求
         wx.request({
@@ -51,12 +50,15 @@ App({
           method: 'GET',
           success: function (loginResult) {
             var data = loginResult.data.data;
-            console.info("loginResult", loginResult)
-            that.globalData.session_key = data.session;
-            that.globalData.g_remain_min_minutes = data.remain_min_minutes;
-            that.globalData.g_remain_max_minutes = data.remain_max_minutes;
-            that.globalData.g_sum_money = data.sum_money;
-
+            if(loginResult.data.errcode == 0){
+              that.globalData.session_key = data.session;
+              that.globalData.g_remain_min_minutes = data.remain_min_minutes;
+              that.globalData.g_remain_max_minutes = data.remain_max_minutes;
+              that.globalData.g_sum_money = data.sum_money;
+            }
+            else{
+              console.log(loginResult.data.errMsg);
+            }
           }
         });
       }

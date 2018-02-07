@@ -12,7 +12,7 @@
     <view hidden='{{chargeType == 0}}'>共
       <text>{{checkInNights}}</text>晚</view>
   </view>
-  <view class='footer'>苏州管前街1100号</view>
+  <view class='footer'>苏州市观前街旧学前88号</view>
 </view>
 
 <view class='content'>
@@ -60,15 +60,15 @@
   <view class='left'>
     <block wx:if="{{chargeType == 0}}">
       <text class='price' wx:if="{{leaveTime > 15}}">{{leaveTime}}分钟 <text style='color:#666;font-size:22rpx'>剩余入住时间</text></text>
-      <text class='price' wx:else>￥{{payAmount}} <text style='color:#666;font-size:22rpx'>剩余金额将返还至个人账号</text></text>
+      <text class='price' wx:else>￥{{payAmount}}元 <text style='color:#666;font-size:22rpx'>剩余金额将返还至个人账号</text></text>
       <text class='intro'>￥30 清洁费</text>
     </block>
     <block wx:else>
-      <text class='price'>¥{{totalFee}}</text>
+      <text class='price'>¥{{totalFee}}元</text>
        <text class='intro'>剩余金额将返还至个人账号</text>
     </block>
     <!-- <text class='detail'>明细</text> -->
-    <image class='imgs' src='../../image/upangel.png'></image>
+    <!-- <image class='imgs' src='../../image/upangel.png'></image> -->
   </view>
   <button class="right" formType="submit">提交订单</button>  
   <!-- <view class='right' bindtap="submitOrder" >提交订单</view> -->
