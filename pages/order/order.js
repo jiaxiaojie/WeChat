@@ -23,7 +23,8 @@ Page({
     tel: '',
     currentCustomerNumber: 1 ,
     leaveTime:'',
-    payAmount:''
+    payAmount:'',
+    cleaningFee:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -57,7 +58,7 @@ Page({
       if(res.errcode == 0){
         that.setData({
           leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
-          payAmount: that.bookingInformation.member_house_price * 100 * that.data.checkInNights
+          payAmount: that.bookingInformation.member_house_price/100 * that.data.checkInNights
         })
       }else{
         console.log(res.errmsg)
@@ -69,8 +70,12 @@ Page({
     if (this.bookingInformation.charge_type == 0) {//分时房
       // this.totalFee = this.avalibleRoomNumber * (this.bookingInformation.cleaning_fee +
       //   this.bookingInformation.member_timekeeping_price) * 100;
+      this.setData({
+        cleaningFee: this.bookingInformation.cleaning_fee / 100
+      });
+      console.log(this.data.cleaningFee)
     } else if (this.bookingInformation.charge_type == 1) {//天时房
-      this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price *100;
+      this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price/100;
     } else {
       this.totalFee = 0;
     }

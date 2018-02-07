@@ -127,8 +127,8 @@ getAllOrders:function(){
 
       var cancelOrderList = newOrderList.map(function(value){
         if (value.order_state == 2 || value.order_state == 3 ){
-          cancelOrderList.push(value);
-          return cancelOrderList;
+          // cancelOrderList.push(value);
+          return value;
         }
       });
       console.log(cancelOrderList);

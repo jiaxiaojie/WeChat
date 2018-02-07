@@ -61,7 +61,7 @@
     <block wx:if="{{chargeType == 0}}">
       <text class='price' wx:if="{{leaveTime > 15}}">{{leaveTime}}分钟 <text style='color:#666;font-size:22rpx'>剩余入住时间</text></text>
       <text class='price' wx:else>￥{{payAmount}}元 <text style='color:#666;font-size:22rpx'>剩余金额将返还至个人账号</text></text>
-      <text class='intro'>￥30 清洁费</text>
+      <text class='intro'>￥{{cleaningFee}} 清洁费</text>
     </block>
     <block wx:else>
       <text class='price'>¥{{totalFee}}元</text>

@@ -37,7 +37,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price}}
+              {{item.order_price/100}}元
           </view> 
           <view class='cancel' style='' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付
@@ -78,7 +78,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price*100}}元
+              {{item.order_price/100}}元
           </view> 
           <view style='display:flex'>
             <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
@@ -94,6 +94,7 @@
       </view>
     </view>
   </view>
+  <view class='emptyInfo' wx:if="{{allOrders.length == 0}}">暂无信息</view>
 </view>
 
 <!--待支付  -->
@@ -120,7 +121,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price}}元
+              {{item.order_price/100}}元
           </view> 
           <view style='display:flex'>
             <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
@@ -163,7 +164,7 @@
               {{item.differH}}小时{{item.differM}}分钟
             </view>
             <view class='price' hidden="{{item.pay_type == 0}}">
-                {{item.order_price}}元
+                {{item.order_price/100}}元
             </view> 
             <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
               取消支付
@@ -204,7 +205,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price}}元
+              {{item.order_price/100}}元
           </view> 
           <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付
@@ -244,7 +245,7 @@
             {{item.differH}}小时{{item.differM}}分钟
           </view>
           <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price}}元
+              {{item.order_price/100}}元
           </view> 
           <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
             取消支付
