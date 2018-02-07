@@ -123,7 +123,16 @@ getAllOrders:function(){
         value.differH = differHours;
         value.differM = differMinutes;
         return value;
-      })
+      });
+
+      var cancelOrderList = newOrderList.map(function(value){
+        if (value.order_state == 2 || value.order_state == 3 ){
+          cancelOrderList.push(value);
+          return cancelOrderList;
+        }
+      });
+      console.log(cancelOrderList);
+
       that.setData({
         allOrders: newOrderList
       })
