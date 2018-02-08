@@ -17,10 +17,10 @@
   <view class='title'>苏州缀美主题酒店</view>
   <view class='info'>
     <view>入住:
-      <text style="color:#000;">{{checkinData}}</text>
+      <text style="color:#000;">{{checkinDate}}</text>
     </view>
     <view style='margin-left:160rpx;margin-right:120rpx;'>离店:
-      <text style="color:#000;">{{checkoutData}}</text>
+      <text style="color:#000;">{{checkoutDate}}</text>
     </view>
     <view>共
       <text>{{totalnight}} </text>晚</view>

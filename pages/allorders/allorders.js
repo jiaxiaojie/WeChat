@@ -9,7 +9,11 @@ Page({
    */
   data: {
     currentTab:0,
-    allOrders:[]
+    allOrders:[],
+    cancelOrderList:[],
+    unpayOrderList:[],
+    checkedOrderList:[],
+    uncheckedOrderList:[]
   },
   swichNav: function (e) {
     var that = this;
@@ -125,16 +129,25 @@ getAllOrders:function(){
         return value;
       });
 
-      var cancelOrderList = newOrderList.map(function(value){
-        if (value.order_state == 2 || value.order_state == 3 ){
-          // cancelOrderList.push(value);
-          return value;
-        }
+      var cancelOrderList = newOrderList.filter(function(value){
+        return (value.order_state == 2 || value.order_state == 3);
       });
-      console.log(cancelOrderList);
+      var unpayOrderList = newOrderList.filter(function (value) {
+        return (value.order_state == 6);
+      });
+      var checkedOrderList = newOrderList.filter(function (value) {
+        return (value.order_state == 4 || value.order_state == 5);
+      });
+      var uncheckedOrderList = newOrderList.filter(function (value) {
+        return (value.order_state == 0 || value.order_state == 1);
+      });
 
       that.setData({
-        allOrders: newOrderList
+        allOrders: newOrderList,
+        cancelOrderList: cancelOrderList,
+        unpayOrderList: unpayOrderList,
+        checkedOrderList: checkedOrderList,
+        uncheckedOrderList: uncheckedOrderList
       })
     }
     else {

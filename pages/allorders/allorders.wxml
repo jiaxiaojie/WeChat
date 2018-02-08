@@ -94,55 +94,55 @@
       </view>
     </view>
   </view>
-  <view class='emptyInfo' wx:if="{{allOrders.length == 0}}">暂无信息</view>
+   <view class='emptyInfo'  hidden='{{allOrders.length > 0}}'>暂无数据</view>
 </view>
 
 <!--待支付  -->
 <view style="display:{{currentTab==1? '' : 'none'}}">
-  <view wx:for="{{allOrders}}" wx:key="id">
-    <view class='item' wx:if="{{item.order_state == 6}}">
-      <view class='up'>
-        <view class='one'>
-          <text class='title'>{{item.room_detail[0].name}}</text>
+  <view wx:for="{{unpayOrderList}}" wx:key="id">
+    <view class='item'>
+        <view class='up'>
+          <view class='one'>
+            <text class='title'>{{item.room_detail[0].name}}</text>
+          </view>
+          <view class='two'> 
+            <view>
+              <text style='color:#999;margin-right:10rpx;'>入住:</text>
+              <text>{{item.come_at}}</text>
+            </view>
+            <view>
+              <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+              <text>{{item.leave_at}}</text>
+            </view>
+          </view>
         </view>
-        <view class='two'> 
-          <view>
-            <text style='color:#999;margin-right:10rpx;'>入住:</text>
-            <text>{{item.come_at}}</text>
-          </view>
-          <view>
-            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-            <text>{{item.leave_at}}</text>
-          </view>
+        <view class='down'>
+            <view class='time' hidden="{{item.pay_type == 1}}">
+              {{item.differH}}小时{{item.differM}}分钟
+            </view>
+            <view class='price' hidden="{{item.pay_type == 0}}">
+                {{item.order_price/100}}元
+            </view> 
+            <view style='display:flex'>
+              <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
+                取消支付
+              </view>
+              <view class='again'  wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
+                立即支付
+              </view>
+            </view> 
+            <view class='again' hidden="{{item.order_state == 6}}">
+              <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
+            </view>
         </view>
       </view>
-      <view class='down'>
-          <view class='time' hidden="{{item.pay_type == 1}}">
-            {{item.differH}}小时{{item.differM}}分钟
-          </view>
-          <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price/100}}元
-          </view> 
-          <view style='display:flex'>
-            <view class='cancel' style='margin-right:10rpx' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
-              取消支付
-            </view>
-            <view class='again'  wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
-              立即支付
-            </view>
-          </view> 
-          <view class='again' hidden="{{item.order_state == 6}}">
-            <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
-          </view>
-      </view>
-    </view>
-    <block wx:elif="{{item.order_state == 0 || item.order_state == 1 || item.order_state == 2 || item.order_state == 3 || item.order_state == 4 || item.order_state == 5}}"></block>
   </view>
+  <view class='emptyInfo'  hidden='{{unpayOrderList.length > 0}}'>暂无数据</view>
 </view>
 <!--未入住  -->
 <view style="display:{{currentTab==2? '' : 'none'}}">
-  <view wx:for="{{allOrders}}" wx:key="id">
-    <view class='item' wx:if="{{item.order_state == 0 || item.order_state == 1}}">
+  <view wx:for="{{uncheckedOrderList}}" wx:key="id">
+    <view class='item'>
       <navigator url='../confirm/confirm?id={{item.id}}'>
         <view class='up'>
           <view class='one'>
@@ -178,13 +178,13 @@
         </view>
       </navigator>
     </view>
-    <block wx:elif="{{item.order_state == 2 || item.order_state == 3 || item.order_state == 4 || item.order_state == 5 || item.order_state == 6}}"></block>
   </view>
+  <view class='emptyInfo'  hidden='{{uncheckedOrderList.length > 0}}'>暂无数据</view>
 </view>
 <!--已入住  -->
 <view style="display:{{currentTab==3? '' : 'none'}}">
-  <view wx:for="{{allOrders}}" wx:key="id">
-    <view class='item' wx:if="{{item.order_state == 4 || item.order_state == 5}}">
+  <view wx:for="{{checkedOrderList}}" wx:key="id">
+    <view class='item'>
       <view class='up'>
         <view class='one'>
           <text class='title'>{{item.room_detail[0].name}}</text>
@@ -218,46 +218,46 @@
           </view>
       </view>
     </view>
-    <block wx:elif="{{item.order_state == 0 || item.order_state == 1 || item.order_state == 2 || item.order_state == 3 || item.order_state == 6}}"></block>
   </view>
+   <view class='emptyInfo'  hidden='{{checkedOrderList.length > 0}}'>暂无数据</view>
 </view>
 <!--已取消  -->
 <view style="display:{{currentTab==4? '' : 'none'}}">
-  <view wx:for="{{allOrders}}" wx:key="id">
-    <view class='item' wx:if="{{item.order_state == 2 || item.order_state == 3}}">
-      <view class='up'>
-        <view class='one'>
-          <text class='title'>{{item.room_detail[0].name}}</text>
+  <view wx:for="{{cancelOrderList}}" wx:key="id">
+    <view class='item'>
+        <view class='up'>
+          <view class='one'>
+            <text class='title'>{{item.room_detail[0].name}}</text>
+          </view>
+          <view class='two'> 
+            <view>
+              <text style='color:#999;margin-right:10rpx;'>入住:</text>
+              <text>{{item.come_at}}</text>
+            </view>
+            <view>
+              <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
+              <text>{{item.leave_at}}</text>
+            </view>
+          </view>
         </view>
-        <view class='two'> 
-          <view>
-            <text style='color:#999;margin-right:10rpx;'>入住:</text>
-            <text>{{item.come_at}}</text>
-          </view>
-          <view>
-            <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-            <text>{{item.leave_at}}</text>
-          </view>
+        <view class='down'>
+            <view class='time' hidden="{{item.pay_type == 1}}">
+              {{item.differH}}小时{{item.differM}}分钟
+            </view>
+            <view class='price' hidden="{{item.pay_type == 0}}">
+                {{item.order_price/100}}元
+            </view> 
+            <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
+              取消支付
+            </view>
+            <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
+              立即支付
+            </view>
+            <view class='again' wx:if="{{item.order_state == 0 || item.order_state == 1 || item.order_state == 2 || item.order_state == 3 || item.order_state == 4}} || item.order_state == 5">
+              <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
+            </view>
         </view>
       </view>
-      <view class='down'>
-          <view class='time' hidden="{{item.pay_type == 1}}">
-            {{item.differH}}小时{{item.differM}}分钟
-          </view>
-          <view class='price' hidden="{{item.pay_type == 0}}">
-              {{item.order_price/100}}元
-          </view> 
-          <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='cancelPay'>
-            取消支付
-          </view>
-          <view class='cancel' style='margin-right:100rpx;' wx:if='{{item.order_state == 6}}' data-id="{{item.id}}" bindtap='goPay'>
-            立即支付
-          </view>
-          <view class='again' wx:if="{{item.order_state == 0 || item.order_state == 1 || item.order_state == 2 || item.order_state == 3 || item.order_state == 4}} || item.order_state == 5">
-            <navigator url="../index/index" hover-class="navigator-hover">再次预定</navigator>
-          </view>
-      </view>
-    </view>
-    <block wx:elif="{{item.order_state == 0 || item.order_state == 1 || item.order_state == 4 || item.order_state == 5 || item.order_state == 6}}"></block>
   </view>
+  <view class='emptyInfo'  hidden='{{cancelOrderList.length > 0}}'>暂无数据</view>
 </view>

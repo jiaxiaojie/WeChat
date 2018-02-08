@@ -52,14 +52,21 @@ Page({
     let jsonData = {
       session:getApp().globalData.session_key
     }
-    // console.log(that.bookingInformation);
     request.httpsGetRequest(url,jsonData,function(res){
       let data = res.data.info;
       if(res.errcode == 0){
-        that.setData({
-          leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
-          payAmount: that.bookingInformation.member_house_price/100 * that.data.checkInNights
-        })
+        if (data == null) {//如果是非会员
+          that.setData({
+            leaveTime: 0,
+            payAmount: that.bookingInformation.house_price / 100 * that.data.checkInNights
+          })
+        }else{//如果是会员
+          that.setData({
+            leaveTime: parseInt(data.balance / that.bookingInformation.member_timekeeping_price),
+            payAmount: that.bookingInformation.member_house_price / 100 * that.data.checkInNights
+          })
+        }
+        
       }else{
         console.log(res.errmsg)
       }
@@ -71,13 +78,14 @@ Page({
       // this.totalFee = this.avalibleRoomNumber * (this.bookingInformation.cleaning_fee +
       //   this.bookingInformation.member_timekeeping_price) * 100;
       this.setData({
-        cleaningFee: this.bookingInformation.cleaning_fee / 100
+        cleaningFee: this.bookingInformation.cleaning_fee/100
       });
-      console.log(this.data.cleaningFee)
-    } else if (this.bookingInformation.charge_type == 1) {//天时房
-      this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price/100;
-    } else {
-      this.totalFee = 0;
+    } 
+    else if (this.bookingInformation.charge_type == 1) {//天时房
+        this.totalFee = this.avalibleRoomNumber * this.bookingInformation.member_house_price/100;
+    } 
+    else {
+        this.totalFee = 0;
     }
     this.totalFee *= this.checkInNights;
     this.setData({
@@ -148,7 +156,6 @@ Page({
     var flag = true;//判断信息输入是否完整 
     var that = this;
     //判断的顺序依次是：姓名-手机号
-    //console.info(e)
     if (e.detail.value.name == "") {
       warn = "请填写您的姓名！";
     } else if (e.detail.value.tel == "") {
@@ -185,6 +192,7 @@ Page({
         success: function (res) {
           console.log(res);  
           if (res.data.errcode == 0) {
+            var currentOrderInfo = JSON.stringify(res.data.data.order);
             wx.requestPayment({
               'timeStamp': res.data.data.pay_config.timeStamp,
               'nonceStr': res.data.data.pay_config.nonceStr,
@@ -192,12 +200,17 @@ Page({
               'signType': res.data.data.pay_config.signType,
               'paySign': res.data.data.pay_config.paySign,
               'success': function (res) {
-                console.log(res.errMsg)
+                console.log(currentOrderInfo)
                 wx.navigateTo({
-                  url: '../confirm/confirm',
+                  url: '../confirm/confirm?_orderInfo=' + currentOrderInfo,
                 })
               },
               'fail': function (res) {
+                wx.showToast({
+                  title: '支付不成功',
+                  icon:'none',
+                  duration:1500
+                })
                 console.log(res.errMsg)
               }
             })
@@ -206,7 +219,7 @@ Page({
             wx.showToast({
               title: res.data.errmsg,
               icon: 'none',
-              duration: 2000
+              duration: 1500
             })
           }
         }
@@ -226,9 +239,6 @@ Page({
         duration: 1500
       })
     }
-
-
-
   },
   /**
    * 用户点击右上角分享

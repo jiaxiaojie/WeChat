@@ -71,6 +71,5 @@
     <!-- <image class='imgs' src='../../image/upangel.png'></image> -->
   </view>
   <button class="right" formType="submit">提交订单</button>  
-  <!-- <view class='right' bindtap="submitOrder" >提交订单</view> -->
 </view>
 </form>
