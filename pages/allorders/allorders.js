@@ -118,12 +118,12 @@ getAllOrders:function(){
       var oldOrderList = res.data.orders;
       var newOrderList = [];
       var newOrderList = oldOrderList.map(function (value) {
-        var date1 = moment(new Date(value.stay_begintime)); //开始时间
-        var date2 = moment(new Date(value.stay_endtime));//结束时间
+        var date1 = moment(new Date(value.come_at)); //入住时间
+        var date2 = moment(new Date(value.leave_at));//离店时间
         var differHours = date2.diff(date1, 'hours');
         var differMinutes = (date2.diff(date1, 'minutes')) % 60;
-        value.stay_begintime = moment(value.stay_begintime).format('YYYY-MM-DD');
-        value.stay_endtime = moment(value.stay_endtime).format('YYYY-MM-DD');
+        value.stay_begintime = moment(value.stay_begintime).format('YYYY-MM-DD');//预约入住时间
+        value.stay_endtime = moment(value.stay_endtime).format('YYYY-MM-DD');//预约离店时间
         value.differH = differHours;
         value.differM = differMinutes;
         return value;

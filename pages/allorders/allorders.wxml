@@ -118,7 +118,7 @@
         </view>
         <view class='down'>
             <view class='time' hidden="{{item.pay_type == 1}}">
-              {{item.differH}}小时{{item.differM}}分钟
+              0分钟
             </view>
             <view class='price' hidden="{{item.pay_type == 0}}">
                 {{item.order_price/100}}元
@@ -161,7 +161,7 @@
         </view>
         <view class='down'>
             <view class='time' hidden="{{item.pay_type == 1}}">
-              {{item.differH}}小时{{item.differM}}分钟
+              0分钟
             </view>
             <view class='price' hidden="{{item.pay_type == 0}}">
                 {{item.order_price/100}}元
@@ -242,7 +242,7 @@
         </view>
         <view class='down'>
             <view class='time' hidden="{{item.pay_type == 1}}">
-              {{item.differH}}小时{{item.differM}}分钟
+              0分钟
             </view>
             <view class='price' hidden="{{item.pay_type == 0}}">
                 {{item.order_price/100}}元
