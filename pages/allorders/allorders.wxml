@@ -24,11 +24,11 @@
         <view class='two'> 
           <view>
             <text style='color:#999;margin-right:10rpx;'>入住:</text>
-            <text>{{item.come_at}}</text>
+            <text>{{item.stay_begintime}}</text>
           </view>
           <view>
             <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-            <text>{{item.leave_at}}</text>
+            <text>{{item.stay_endtime}}</text>
           </view>
         </view>
       </view>
@@ -65,11 +65,11 @@
         <view class='two'> 
           <view>
             <text style='color:#999;margin-right:10rpx;'>入住:</text>
-            <text>{{item.come_at}}</text>
+            <text>{{item.stay_begintime}}</text>
           </view>
           <view>
             <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-            <text>{{item.leave_at}}</text>
+            <text>{{item.stay_endtime}}</text>
           </view>
         </view>
       </view>
@@ -108,11 +108,11 @@
           <view class='two'> 
             <view>
               <text style='color:#999;margin-right:10rpx;'>入住:</text>
-              <text>{{item.come_at}}</text>
+              <text>{{item.stay_begintime}}</text>
             </view>
             <view>
               <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-              <text>{{item.leave_at}}</text>
+              <text>{{item.stay_endtime}}</text>
             </view>
           </view>
         </view>
@@ -151,11 +151,11 @@
           <view class='two'> 
             <view>
               <text style='color:#999;margin-right:10rpx;'>入住:</text>
-              <text>{{item.come_at}}</text>
+              <text>{{item.stay_begintime}}</text>
             </view>
             <view>
               <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-              <text>{{item.leave_at}}</text>
+              <text>{{item.stay_endtime}}</text>
             </view>
           </view>
         </view>
@@ -192,11 +192,11 @@
         <view class='two'> 
           <view>
             <text style='color:#999;margin-right:10rpx;'>入住:</text>
-            <text>{{item.come_at}}</text>
+            <text>{{item.stay_begintime}}</text>
           </view>
           <view>
             <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-            <text>{{item.leave_at}}</text>
+            <text>{{item.stay_endtime}}</text>
           </view>
         </view>
       </view>
@@ -232,11 +232,11 @@
           <view class='two'> 
             <view>
               <text style='color:#999;margin-right:10rpx;'>入住:</text>
-              <text>{{item.come_at}}</text>
+              <text>{{item.stay_begintime}}</text>
             </view>
             <view>
               <text style='margin-left:170rpx;color:#999;margin-right:10rpx;'>离店:</text>
-              <text>{{item.leave_at}}</text>
+              <text>{{item.stay_endtime}}</text>
             </view>
           </view>
         </view>

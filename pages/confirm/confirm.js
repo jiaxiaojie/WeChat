@@ -20,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(JSON.parse(options._orderInfo));
+    // console.log(JSON.parse(options._orderInfo));
     var that = this;
     //预定房间信息确认
     if (options._orderInfo){

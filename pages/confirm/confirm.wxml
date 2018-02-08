@@ -19,7 +19,7 @@
     <view>入住:
       <text style="color:#000;">{{checkinDate}}</text>
     </view>
-    <view style='margin-left:160rpx;margin-right:120rpx;'>离店:
+    <view style=''>离店:
       <text style="color:#000;">{{checkoutDate}}</text>
     </view>
     <view>共
