@@ -13,8 +13,8 @@ Page({
   },
   bindAmountMoney:function(e){
       this.setData({
-        minTime: parseInt(e.detail.value / this.data.timePrice),
-        maxTime: parseInt(e.detail.value / this.data.memberTimePrice)
+        minTime: parseInt(e.detail.value/this.data.timePrice*100),
+        maxTime: parseInt(e.detail.value/this.data.memberTimePrice*100)
       })
   },
   formSubmit: function (e) {
@@ -26,7 +26,7 @@ Page({
       })
     } else if (e.detail.value.amount <=1){
       wx.showToast({
-        title: '金额不得小于1分钱!',
+        title: '金额不得小于1元钱!',
         icon: 'none',
         duration: 1500
       })
@@ -34,7 +34,7 @@ Page({
     else{
       var data = {
         session:getApp().globalData.session_key,
-        sum: e.detail.value.amount
+        sum: e.detail.value.amount*100
       };
       request.httpsPostRequest('/pay/custom-pay', data, function (res) {
         if(res.errcode == 0){
